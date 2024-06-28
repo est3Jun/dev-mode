@@ -36,7 +36,7 @@
       margin-right:3%;
     }
     .container{
-      float: right;
+      float: left;
     }
     .container1{
       float: left;
@@ -49,21 +49,37 @@
     .search-bar {
       margin-top: 20px;
       margin-bottom: 20px;
-      width:800px;
+      width:955px;
       display: flex;
-      justify-content: right;
+      justify-content: left;
     }
     .content {
       display: flex;
       justify-content: space-between;
     }
-    .login-form {
+    .user-profile {
       flex: 1;
       padding: 1px;
-      width:15%;
       float:right;
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-right: 20px; /* Adjust the margin as needed */
     }
-   
+    .user-profile img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+    .user-profile .dropdown {
+      display: inline-block;
+    }
+    .user-profile .dropdown-menu {
+      right: 0;
+      left: auto;
+    }
     .button-form {
       float:right;
     }
@@ -88,6 +104,45 @@
       height: 250px;
       object-fit: cover;
     }
+    .container2 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      float: left;
+    }
+    .album-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 40px;
+    }
+
+    .album-item {
+      flex: 0 0 18%; /* Adjusted to fit 5 items per row (100% / 5 = 20%, minus some margin) */
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      text-align: center;
+      padding: 0 10px; /* Adding padding to maintain spacing between items */
+    }
+
+    .album-title {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .album-item img {
+      width: 100%;
+      height: auto;
+    }
+    footer {
+      background-color: lightgray;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -95,7 +150,6 @@
 <body ng-app="application" ng-controller="AppCtrl">
   <!-- Navigation Bar -->
   <nav class="navbar navbar-default navbar-fixed-top">
-
     <div class="container1">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -108,33 +162,36 @@
       <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">버튼1</a></li>
+          <li><a href="#">엄준식</a></li>
           <li><a href="#">버튼2</a></li>
           <li><a href="#">버튼3</a></li>
-          
           <div class="container search-bar">
             <div class="search-bar">
               <a class="navbar-brand" href="">SoundBlock</a>
               <input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="검색어">
               <button class="btn btn-outline-secondary" type="button">검색</button>
-            
             </div>
           </div>
         </ul>
-        
-        
-          <div class="login-form">
-            <input type="text" class="form-control" placeholder="아이디" id="navbar-inputID">
-            <input type="password" class="form-control" placeholder="비밀번호" id="navbar-inputPassword">
-            <div class="button-form">
-            <button type="submit" class="btn btn-primary">로그인</button>
-            <button type="submit" class="btn btn-primary">회원가입</button>
-            </div>
+        <div class="user-profile">
+          <img src="https://via.placeholder.com/40" alt="User Avatar">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              유저 이름넣으셈
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Settings</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" onClick="location.href='index.html'">로그아웃</a></li>
+            </ul>
           </div>
-        
+        </div>
       </div>
     </div>
   </nav>
+
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide"><img src="https://wimg.mk.co.kr/meet/neds/2019/11/image_readtop_2019_937818_15736086053974580.jpg" alt=""></div>
@@ -149,47 +206,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <div id="body">
-    <div class="form-group">
-      <label>Account</label>
-      <h5 style="color:green;margin-bottom:2%" id="success_init">{{init_ab}}</h5>
-      <br>
-      User: <input class="form-control" type="text" placeholder="Ex: Hyper" ng-model="abstore.a">
-      Amount: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="abstore.aval">
-      <input id="initAB" type="submit" value="Create" class="btn btn-primary" ng-click="initAB()">
-      <br>
-    </div>
-    <hr>
-    <div class="form-group">
-      <h5 style="color:green;margin-bottom:2%" id="success_qurey">{{query_ab}}</h5>
-      <label>Query</label>
-      <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="walletid">
-      <input id="queryAB" type="submit" value="Search" class="btn btn-primary" ng-click="queryAB()"></p>
-    </div>
-    <div class="form-group">
-      <h5 style="color:green;margin-bottom:2%" id="success_searchadmin">{{search_admin}}</h5>
-      <label>Admin</label>
-      <p><input id="searchAdmin" type="submit" value="Search" class="btn btn-primary" ng-click="searchAdmin()"></p>
-    </div>
-
-    <div class="form-group">
-      <h5 style="color:green;margin-bottom:2%" id="delete_query">{{delete_ab}}</h5>
-      <label>Delete</label>
-      <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="delete.a">
-      <input id="deleteAB" type="submit" value="Delete" class="btn btn-primary" ng-click="deleteAB()"></p>
-    </div>
-
-    <div class="form-group">
-      <h5 style="color:green;margin-bottom:2%" id="success_transfer">{{transfer_ab}}</h5>
-      <label>Sender</label>
-      <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="transfer.sender">
-      <label>Receiver</label>
-      <input class="form-control" type="text" placeholder="Ex: A" ng-model="transfer.receiver">
-      <label>Amount</label>
-      <input class="form-control" type="text" placeholder="Ex: 123" ng-model="transfer.amount">
-      <input id="transferAB" type="submit" value="Transfer" class="btn btn-primary" ng-click="transferAB()"></p>
-    </div>
-  </div>
+ 
    <!-- Swiper JS -->
    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -212,6 +229,59 @@
        },
      });
    </script>
+
+   <div class="container2">
+    <h2>최신 음악</h2>
+
+    <div class="album-container">
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 1">
+            <div class="album-title">지민 & 로꼬</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 2">
+            <div class="album-title">리사 (LISA)</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 3">
+            <div class="album-title">COCONA</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 4">
+            <div class="album-title">오시영</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 5">
+            <div class="album-title">Imagine Dragons</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 6">
+            <div class="album-title">KATSEYE</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 7">
+            <div class="album-title">B-Free & Hukky Shibaseki</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 8">
+            <div class="album-title">kenessi</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 9">
+            <div class="album-title">BÉBE YANA & Closet Yi</div>
+        </div>
+        <div class="album-item">
+            <img src="https://via.placeholder.com/150" alt="Album 10">
+            <div class="album-title">Men's Tear</div>
+        </div>
+    </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 SoundBlock. All rights reserved.</p>
+</footer>
+
 </body>
+
 <script type="text/javascript" src="app.js"></script>
 </html>
