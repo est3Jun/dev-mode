@@ -16,7 +16,6 @@ async function send(type, func, args, res, result){
         const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);  
-        
 
         const gateway = new Gateway();
 
