@@ -56,8 +56,8 @@
             </div>
 
             <div class="profile-card-ctr">
-                <button class="profile-card__button button--blue js-message-btn" data-toggle="modal" data-target="#myModal">충전하기</button>
-                <button class="profile-card__button button--orange">팔로우</button>
+                <button class="profile-card__button button--blue js-message-btn" data-toggle="modal" data-target="#chargeModal">충전하기</button>
+                <button class="profile-card__button button--orange" data-toggle="modal" data-target="#exchangeModal">환전하기</button>
             </div>
         </div>
 
@@ -77,21 +77,52 @@
         </div>
     </div>
 
-    <!-- 모달 구조 -->
-    <div id="myModal" class="modal fade" role="dialog">
+    <!-- 충전 모달 -->
+    <div id="chargeModal" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog">
             <!-- 모달 내용-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">충전하기</h4>
                 </div>
                 <div class="modal-body">
                     <p>현재 보유 포인트: {{user.point}}</p>
                     <p>연결 계좌: {{user.account_number}}</p>
                     <p>잔액: {{user.account_money}}</p>
+                    <div class="form-group">
+                        <label for="chargeAmount">충전 금액:</label>
+                        <input type="number" class="form-control" id="chargeAmount" ng-model="chargeAmount" placeholder="충전 금액을 입력하세요">
+                    </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="charge()">충전하기</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 환전 모달 -->
+    <div id="exchangeModal" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <!-- 모달 내용-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">환전하기</h4>
+                </div>
+                <div class="modal-body">
+                    <p>현재 보유 포인트: {{user.point}}</p>
+                    <p>연결 계좌: {{user.account_number}}</p>
+                    <p>환전 가능 포인트: {{user.point}}</p>
+                    <div class="form-group">
+                        <label for="exchangeAmount">환전 금액:</label>
+                        <input type="number" class="form-control" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="exchange()">환전하기</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                 </div>
             </div>
@@ -108,6 +139,84 @@
     </svg>
 </body>
 <script>
+    var app = angular.module('application', []);
+    app.controller('MypageCtrl', function($scope, appFactory){
+        var urlParams = new URLSearchParams(window.location.search);
+        var userId = urlParams.get('userId');
+
+        // userId로 사용자 정보 로드
+        if(userId){
+            appFactory.queryAB(userId, function(data){
+                $scope.user = JSON.parse(data);
+                $scope.user.profilePicture = 'https://via.placeholder.com/150';
+            });
+        }
+
+        $scope.charge = function() {
+            var chargeAmount = $scope.chargeAmount;
+
+            if (chargeAmount && chargeAmount > 0) {
+                appFactory.chargeAB({ userId: $scope.user.id, amount: chargeAmount }, function(response) {
+                    if (response.status === 200) {
+                        // 성공적으로 충전이 완료되었을 때, 사용자 정보를 다시 로드합니다.
+                        appFactory.queryAB($scope.user.id, function(data){
+                            $scope.user = JSON.parse(data);
+                        });
+                        alert('충전이 완료되었습니다.');
+                    } else {
+                        alert('충전 실패: ' + response.data);
+                    }
+                });
+            } else {
+                alert('올바른 금액을 입력하세요.');
+            }
+        };
+
+        $scope.exchange = function() {
+            var exchangeAmount = $scope.exchangeAmount;
+
+            if (exchangeAmount && exchangeAmount > 0) {
+                appFactory.exchangeAB({ userId: $scope.user.id, amount: exchangeAmount }, function(response) {
+                    if (response.status === 200) {
+                        // 성공적으로 환전이 완료되었을 때, 사용자 정보를 다시 로드합니다.
+                        appFactory.queryAB($scope.user.id, function(data){
+                            $scope.user = JSON.parse(data);
+                        });
+                        alert('환전이 완료되었습니다.');
+                    } else {
+                        alert('환전 실패: ' + response.data);
+                    }
+                });
+            } else {
+                alert('올바른 금액을 입력하세요.');
+            }
+        };
+    });
+
+    app.factory('appFactory', function($http){
+        var factory = {};
+
+        factory.queryAB = function(name, callback){
+            $http.get('/query?name='+name).success(function(output){
+                callback(output);
+            });
+        };
+
+        factory.chargeAB = function(data, callback) {
+            $http.get('/charge?userId=' + data.userId + '&amount=' + data.amount).then(function(response) {
+                callback(response);
+            });
+        };
+
+        factory.exchangeAB = function(data, callback) {
+            $http.get('/exchange?userId=' + data.userId + '&amount=' + data.amount).then(function(response) {
+                callback(response);
+            });
+        };
+
+        return factory;
+    });
+
     var messageBox = document.querySelector('.js-message');
     var btn = document.querySelector('.js-message-btn');
     var card = document.querySelector('.js-profile-card');
@@ -123,6 +232,13 @@
             e.preventDefault();
             card.classList.remove('active');
         });
+    });
+
+    // 모달 닫힘 이벤트 핸들링
+    $('#chargeModal, #exchangeModal').on('hide.bs.modal', function (e) {
+        if (!confirm('충전을 그만하시겠습니까?')) {
+            e.preventDefault();
+        }
     });
 </script>
 </html>

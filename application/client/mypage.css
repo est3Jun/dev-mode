@@ -35,7 +35,7 @@ a, a:hover {
   padding-top: 100px;
   display: flex;
   /* background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%); */
-background-color: #f7edd5;
+  background-color: #f7edd5;
 
   @media screen and (max-width: 768px) {
     height: auto;
@@ -55,9 +55,9 @@ background-color: #f7edd5;
   position: relative;
 }
 
-.profile-card.active .profile-card__cnt {
+/* .profile-card.active .profile-card__cnt {
   filter: blur(6px);
-}
+} */
 
 .profile-card.active .profile-card-message,
 .profile-card.active .profile-card__overlay {

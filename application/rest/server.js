@@ -29,6 +29,20 @@ app.get('/login', function (req, res) {
   });
 });
 
+app.get('/charge', function (req, res) {
+   let userId = req.query.userId;
+   let amount = req.query.amount;
+   let args = [userId, amount];
+   sdk.send(false, 'charge', args, res);
+});
+
+app.get('/exchange', function (req, res) {
+   let userId = req.query.userId;
+   let amount = req.query.amount;
+   let args = [userId, amount];
+   sdk.send(false, 'exchange', args, res);
+});
+
 app.get('/delete', function (req, res) {
    let name = req.query.name;
    let args = [name];
