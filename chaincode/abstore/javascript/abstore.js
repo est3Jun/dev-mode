@@ -95,7 +95,7 @@ async login(stub, args) {
   console.info(`User ${userId} logged in successfully`);
   return Buffer.from('Login successful');
 }
-  
+
 
   async transfer(stub, args) {
     if (args.length != 3) {

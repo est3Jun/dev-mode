@@ -1,51 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-   <title>My Page</title>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-   <script src="mypage.js"></script>
-
-   <style type="text/css">
-     header{
-       background-color: lightgray;
-       font-size:20px;
-       padding:20px;
-     }
-     header, .form-group{
-       margin-bottom: 3%;
-     }
-     .form-group{
-       width:50%;
-     }
-     #body{
-       margin-left:3%;
-       margin-right:3%;
-     }
-     .form-control{
-       margin: 8px;
-     }
-     label{
-       font-size:20px;
-     }
-   </style>
- </head>
- <body ng-app="application" ng-controller="MypageCtrl">
-    <header>
-      <div id="left_header">My Page</div>
-    </header>
-    <div id="body">
-      <div class="form-group">
-        <label>User Info</label>
-        <p>ID: {{user.id}}</p>
-        <p>Name: {{user.name}}</p>
-        <p>Poing: {{user.point}}</p>
-        <p>Phone Number: {{user.phone_number}}</p>
-        <p>Account Number: {{user.account_number}}</p>
-        <p>Account Money: {{user.account_money}}</p>
-      </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="mypage.js"></script>
+    <link rel="stylesheet" href="mypage.css">
+</head>
+<body ng-app="application" ng-controller="MypageCtrl">
+    <div class="profile-header">
+        <div class="profile-image">
+            <img ng-src="{{user.profilePicture}}" alt="Profile Picture">
+        </div>
+        <div class="profile-info">
+            <h1>{{user.name}}</h1>
+            <p>ID: {{user.id}}</p>
+            <p>Phone Number: {{user.phone_number}}</p>
+            <p>Account Number: {{user.account_number}}</p>
+            <p>Account Money: {{user.account_money}}</p>
+            <p>Point: {{user.point}}</p>
+        </div>
     </div>
-  </body>
- </html>
+    <div class="profile-actions">
+        <button class="btn btn-primary">Button 1</button>
+        <button class="btn btn-secondary">Button 2</button>
+    </div>
+    <div class="container">
+        <div class="profile-middle">
+            <h2>Additional Information</h2>
+            <p>Here you can add more user information or details.</p>
+        </div>
+        <div class="profile-bottom">
+            <h2>Other Information</h2>
+            <p>Here you can add some other information or details about the user.</p>
+        </div>
+    </div>
+</body>
+</html>

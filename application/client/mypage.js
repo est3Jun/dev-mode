@@ -1,8 +1,26 @@
-'use strict';
-
 var app = angular.module('application', []);
 
-app.controller('MypageCtrl', function($scope) {
-    // 세션 또는 로컬 저장소에서 유저 정보 불러오기
-    $scope.user = JSON.parse(sessionStorage.getItem('user'));
+app.controller('MypageCtrl', function($scope, appFactory){
+    var urlParams = new URLSearchParams(window.location.search);
+    var userId = urlParams.get('userId');
+
+    // userId로 사용자 정보 로드
+    if(userId){
+        appFactory.queryAB(userId, function(data){
+            $scope.user = JSON.parse(data);
+            $scope.user.profilePicture = 'https://via.placeholder.com/150';
+        });
+    }
+});
+
+app.factory('appFactory', function($http){
+    var factory = {};
+
+    factory.queryAB = function(name, callback){
+        $http.get('/query?name='+name).success(function(output){
+            callback(output);
+        });
+    };
+
+    return factory;
 });
