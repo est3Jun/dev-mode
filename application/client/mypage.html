@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
+    <title>마이 페이지</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -12,32 +12,117 @@
     <link rel="stylesheet" href="mypage.css">
 </head>
 <body ng-app="application" ng-controller="MypageCtrl">
-    <div class="profile-header">
-        <div class="profile-image">
-            <img ng-src="{{user.profilePicture}}" alt="Profile Picture">
+    <div class="wrapper">
+        <div class="profile-card js-profile-card">
+            <div class="profile-card__img">
+                <img ng-src="{{user.profilePicture}}" alt="프로필 사진">
+            </div>
+
+            <div class="profile-card__cnt js-profile-cnt">
+                <div class="profile-card__name">{{user.name}}</div>
+                <div class="profile-card__txt">전화번호: {{user.phone_number}}</div>
+                <div class="profile-card-loc">
+                    <span class="profile-card-loc__icon">
+                        <svg class="icon"><use xlink:href="#icon-location"></use></svg>
+                    </span>
+                    <span class="profile-card-loc__txt">주소</span>
+                </div>
+            </div>
+
+            <div class="profile-card-inf">
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.id}}</div>
+                    <div class="profile-card-inf__txt">아이디</div>
+                </div>
+
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.account_number}}</div>
+                    <div class="profile-card-inf__txt">계좌번호</div>
+                </div>
+
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.account_money}}</div>
+                    <div class="profile-card-inf__txt">잔액</div>
+                </div>
+
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.point}}</div>
+                    <div class="profile-card-inf__txt">포인트</div>
+                </div>
+            </div>
+
+            <div class="profile-card-social">
+                <!-- 여기에 소셜 미디어 아이콘을 추가할 수 있습니다. -->
+            </div>
+
+            <div class="profile-card-ctr">
+                <button class="profile-card__button button--blue js-message-btn" data-toggle="modal" data-target="#myModal">충전하기</button>
+                <button class="profile-card__button button--orange">팔로우</button>
+            </div>
         </div>
-        <div class="profile-info">
-            <h1>{{user.name}}</h1>
-            <p>ID: {{user.id}}</p>
-            <p>Phone Number: {{user.phone_number}}</p>
-            <p>Account Number: {{user.account_number}}</p>
-            <p>Account Money: {{user.account_money}}</p>
-            <p>Point: {{user.point}}</p>
+
+        <div class="profile-card-message js-message">
+            <form class="profile-card-form">
+                <div class="profile-card-form__container">
+                    <textarea placeholder="메시지를 입력하세요..."></textarea>
+                </div>
+
+                <div class="profile-card-form__bottom">
+                    <button class="profile-card__button button--blue js-message-close">보내기</button>
+                    <button class="profile-card__button button--gray js-message-close">취소</button>
+                </div>
+            </form>
+
+            <div class="profile-card__overlay js-message-close"></div>
         </div>
     </div>
-    <div class="profile-actions">
-        <button class="btn btn-primary">Button 1</button>
-        <button class="btn btn-secondary">Button 2</button>
-    </div>
-    <div class="container">
-        <div class="profile-middle">
-            <h2>Additional Information</h2>
-            <p>Here you can add more user information or details.</p>
+
+    <!-- 모달 구조 -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- 모달 내용-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>현재 보유 포인트: {{user.point}}</p>
+                    <p>연결 계좌: {{user.account_number}}</p>
+                    <p>잔액: {{user.account_money}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
         </div>
-        <div class="profile-bottom">
-            <h2>Other Information</h2>
-            <p>Here you can add some other information or details about the user.</p>
-        </div>
     </div>
+
+    <svg hidden="hidden">
+        <defs>
+            <symbol id="icon-location" viewBox="0 0 32 32">
+                <title>location</title>
+                <path d="M16 31.68c-0.352 0-0.672-0.064-1.024-0.16-0.8-0.256-1.44-0.832-1.824-1.6l-6.784-13.632c-1.664-3.36-1.568-7.328 0.32-10.592 1.856-3.2 4.992-5.152 8.608-5.376h1.376c3.648 0.224 6.752 2.176 8.608 5.376 1.888 3.264 2.016 7.232 0.352 10.592l-6.816 13.664c-0.288 0.608-0.8 1.12-1.408 1.408-0.448 0.224-0.928 0.32-1.408 0.32zM15.392 2.368c-2.88 0.192-5.408 1.76-6.912 4.352-1.536 2.688-1.632 5.92-0.288 8.672l6.816 13.632c0.128 0.256 0.352 0.448 0.64 0.544s0.576 0.064 0.832-0.064c0.224-0.096 0.384-0.288 0.48-0.48l6.816-13.664c1.376-2.752 1.248-5.984-0.288-8.672-1.472-2.56-4-4.128-6.88-4.32h-1.216zM16 17.888c-3.264 0-5.92-2.656-5.92-5.92 0-3.232 2.656-5.888 5.92-5.888s5.92 2.656 5.92 5.92c0 3.264-2.656 5.888-5.92 5.888zM16 8.128c-2.144 0-3.872 1.728-3.872 3.872s1.728 3.872 3.872 3.872 3.872-1.728 3.872-3.872c0-2.144-1.76-3.872-3.872-3.872z"></path>
+            </symbol>
+        </defs>
+    </svg>
 </body>
+<script>
+    var messageBox = document.querySelector('.js-message');
+    var btn = document.querySelector('.js-message-btn');
+    var card = document.querySelector('.js-profile-card');
+    var closeBtn = document.querySelectorAll('.js-message-close');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+    });
+
+    closeBtn.forEach(function (element, index) {
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            card.classList.remove('active');
+        });
+    });
+</script>
 </html>
