@@ -8,72 +8,59 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="mypage.js"></script>
     <link rel="stylesheet" href="mypage.css">
 </head>
 <body ng-app="application" ng-controller="MypageCtrl">
-    <div class="wrapper">
-        <div class="profile-card js-profile-card">
-            <div class="profile-card__img">
-                <img ng-src="{{user.profilePicture}}" alt="프로필 사진">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">MyPage</a>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
 
-            <div class="profile-card__cnt js-profile-cnt">
-                <div class="profile-card__name">{{user.name}}</div>
-                <div class="profile-card__txt">전화번호: {{user.phone_number}}</div>
-                <div class="profile-card-loc">
-                    <span class="profile-card-loc__icon">
-                        <svg class="icon"><use xlink:href="#icon-location"></use></svg>
-                    </span>
-                    <span class="profile-card-loc__txt">주소</span>
-                </div>
-            </div>
-
-            <div class="profile-card-inf">
-                <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">{{user.id}}</div>
-                    <div class="profile-card-inf__txt">아이디</div>
-                </div>
-
-                <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">{{user.account_number}}</div>
-                    <div class="profile-card-inf__txt">계좌번호</div>
-                </div>
-
-                <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">{{user.account_money}}</div>
-                    <div class="profile-card-inf__txt">잔액</div>
-                </div>
-
-                <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">{{user.point}}</div>
-                    <div class="profile-card-inf__txt">포인트</div>
-                </div>
-            </div>
-
-            <div class="profile-card-social">
-                <!-- 여기에 소셜 미디어 아이콘을 추가할 수 있습니다. -->
-            </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-card js-profile-card">
+                    <div class="profile-card__img">
+                        <img ng-src="{{user.profilePicture}}" alt="프로필 사진">
+                    </div>
+                    <div class="profile-card__cnt js-profile-cnt">
+                        <div class="profile-card__name">{{user.name}}</div>
+                        <div class="profile-card__txt">전화번호: {{user.phone_number}}</div>                
+                    </div>
+                    <div class="profile-card-inf">
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.id}}</div>
+                            <div class="profile-card-inf__txt">아이디</div>
+                        </div>
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.account_number}}</div>
+                            <div class="profile-card-inf__txt">계좌번호</div>
+                        </div>
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.account_money}}</div>
+                            <div class="profile-card-inf__txt">잔액</div>
+                        </div>
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.point}}</div>
+                            <div class="profile-card-inf__txt">포인트</div>
+                        </div>
+                    </div>
 
             <div class="profile-card-ctr">
                 <button class="profile-card__button button--blue js-message-btn" data-toggle="modal" data-target="#chargeModal">충전하기</button>
                 <button class="profile-card__button button--orange" data-toggle="modal" data-target="#exchangeModal">환전하기</button>
             </div>
-        </div>
-
-        <div class="profile-card-message js-message">
-            <form class="profile-card-form">
-                <div class="profile-card-form__container">
-                    <textarea placeholder="메시지를 입력하세요..."></textarea>
-                </div>
-
-                <div class="profile-card-form__bottom">
-                    <button class="profile-card__button button--blue js-message-close">보내기</button>
-                    <button class="profile-card__button button--gray js-message-close">취소</button>
-                </div>
-            </form>
-
-            <div class="profile-card__overlay js-message-close"></div>
         </div>
     </div>
 
@@ -121,13 +108,57 @@
                         <input type="number" class="form-control" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="exchange()">환전하기</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="my-songs">
+            <h3>나의 음원</h3>
+            <div class="song-list">
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 1">
+                    <div class="song-details">
+                        <p>Song 1</p>
+                        <span>거래금액: 10,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 2">
+                    <div class="song-details">
+                        <p>Song 2</p>
+                        <span>거래금액: 20,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 3">
+                    <div class="song-details">
+                        <p>Song 3</p>
+                        <span>거래금액: 15,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 4">
+                    <div class="song-details">
+                        <p>Song 4</p>
+                        <span>거래금액: 25,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 5">
+                    <div class="song-details">
+                        <p>Song 5</p>
+                        <span>거래금액: 30,000원</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">© 2024 MyPage. All rights reserved.</p>
+        </div>
+    </footer>
 
     <svg hidden="hidden">
         <defs>
@@ -162,7 +193,13 @@
                         appFactory.queryAB($scope.user.id, function(data){
                             $scope.user = JSON.parse(data);
                         });
-                        alert('충전이 완료되었습니다.');
+                        Swal.fire({
+                          title: '충전 완료',
+                          text: '충전이 완료되었습니다.',
+                          icon: 'success',
+                        }).then(function() {
+                            $('#chargeModal').modal('hide');
+                        });
                     } else {
                         alert('충전 실패: ' + response.data);
                     }
@@ -182,7 +219,13 @@
                         appFactory.queryAB($scope.user.id, function(data){
                             $scope.user = JSON.parse(data);
                         });
-                        alert('환전이 완료되었습니다.');
+                        Swal.fire({
+                          title: '환전 완료',
+                          text: '환전이 완료되었습니다.',
+                          icon: 'success',
+                        }).then(function() {
+                            $('#exchangeModal').modal('hide');
+                        });
                     } else {
                         alert('환전 실패: ' + response.data);
                     }
@@ -234,11 +277,6 @@
         });
     });
 
-    // 모달 닫힘 이벤트 핸들링
-    $('#chargeModal, #exchangeModal').on('hide.bs.modal', function (e) {
-        if (!confirm('충전을 그만하시겠습니까?')) {
-            e.preventDefault();
-        }
-    });
+    
 </script>
 </html>

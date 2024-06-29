@@ -117,8 +117,8 @@ app.controller('AppCtrl', function ($scope, $timeout, appFactory) {
     $scope.loginAB = function () {
         appFactory.loginAB($scope.login, function (data) {
             if (data == "Login successful") {
-                // 로그인 성공 시 mypage.html로 리디렉션
-                window.location.href = `mypage.html?userId=${$scope.login.userId}`;
+                // 로그인 성공 시 mainpage.html로 리디렉션
+                window.location.href = `mainpage.html?userId=${$scope.login.userId}`;
             }
             $scope.login_ab = "login success";
             $("#success_login").show();

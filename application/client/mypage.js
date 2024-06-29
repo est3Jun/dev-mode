@@ -14,7 +14,7 @@ app.controller('MypageCtrl', function($scope, appFactory){
 
     $scope.charge = function() {
         var chargeAmount = $scope.chargeAmount;
-
+    
         if (chargeAmount && chargeAmount > 0) {
             appFactory.chargeAB({ userId: $scope.user.id, amount: chargeAmount }, function(response) {
                 if (response.status === 200) {
@@ -22,7 +22,13 @@ app.controller('MypageCtrl', function($scope, appFactory){
                     appFactory.queryAB($scope.user.id, function(data){
                         $scope.user = JSON.parse(data);
                     });
-                    alert('충전이 완료되었습니다.');
+                    Swal.fire({
+                      title: '충전 완료',
+                      text: '충전이 완료되었습니다.',
+                      icon: 'success',
+                    }).then(() => {
+                        $('#chargeModal').modal('hide');
+                    });
                 } else {
                     alert('충전 실패: ' + response.data);
                 }
@@ -31,10 +37,10 @@ app.controller('MypageCtrl', function($scope, appFactory){
             alert('올바른 금액을 입력하세요.');
         }
     };
-
+    
     $scope.exchange = function() {
         var exchangeAmount = $scope.exchangeAmount;
-
+    
         if (exchangeAmount && exchangeAmount > 0) {
             appFactory.exchangeAB({ userId: $scope.user.id, amount: exchangeAmount }, function(response) {
                 if (response.status === 200) {
@@ -42,7 +48,13 @@ app.controller('MypageCtrl', function($scope, appFactory){
                     appFactory.queryAB($scope.user.id, function(data){
                         $scope.user = JSON.parse(data);
                     });
-                    alert('환전이 완료되었습니다.');
+                    Swal.fire({
+                      title: '환전 완료',
+                      text: '환전이 완료되었습니다.',
+                      icon: 'success',
+                    }).then(() => {
+                        $('#exchangeModal').modal('hide');
+                    });
                 } else {
                     alert('환전 실패: ' + response.data);
                 }
@@ -94,9 +106,4 @@ closeBtn.forEach(function (element, index) {
     });
 });
 
-// 모달 닫힘 이벤트 핸들링
-$('#chargeModal, #exchangeModal').on('hide.bs.modal', function (e) {
-    if (!confirm('충전을 그만하시겠습니까?')) {
-        e.preventDefault();
-    }
-});
+
