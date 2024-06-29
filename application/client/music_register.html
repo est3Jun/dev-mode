@@ -1,259 +1,112 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이 페이지</title>
+    <title>음원 등록 / 수정</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="mypage.js"></script>
-    <link rel="stylesheet" href="mypage.css">
-</head>
-<body ng-app="application" ng-controller="MypageCtrl">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">MyPage</a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-card js-profile-card">
-                    <div class="profile-card__img">
-                        <img ng-src="{{user.profilePicture}}" alt="프로필 사진">
-                    </div>
-                    <div class="profile-card__cnt js-profile-cnt">
-                        <div class="profile-card__name">{{user.name}}</div>
-                        <div class="profile-card__txt">전화번호: {{user.phone_number}}</div>                
-                    </div>
-                    <div class="profile-card-inf">
-                        <div class="profile-card-inf__item">
-                            <div class="profile-card-inf__title">{{user.id}}</div>
-                            <div class="profile-card-inf__txt">아이디</div>
-                        </div>
-                        <div class="profile-card-inf__item">
-                            <div class="profile-card-inf__title">{{user.account_number}}</div>
-                            <div class="profile-card-inf__txt">계좌번호</div>
-                        </div>
-                        <div class="profile-card-inf__item">
-                            <div class="profile-card-inf__title">{{user.account_money}}</div>
-                            <div class="profile-card-inf__txt">잔액</div>
-                        </div>
-                        <div class="profile-card-inf__item">
-                            <div class="profile-card-inf__title">{{user.point}}</div>
-                            <div class="profile-card-inf__txt">포인트</div>
-                        </div>
-                    </div>
-                    <div class="profile-card-ctr">
-                        <button class="profile-card__button button--blue js-message-btn" data-toggle="modal" data-target="#chargeModal">충전하기</button>
-                        <button class="profile-card__button button--orange" data-toggle="modal" data-target="#exchangeModal">환전하기</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="my-songs">
-                    <h3>나의 음원</h3>
-                    <div class="song-list">
-                        <div class="song" ng-repeat="song in user.songs">
-                            <img ng-src="{{song.cover}}" alt="음원 표지">
-                            <div class="song-details">
-                                <p>{{song.title}}</p>
-                                <span>거래금액: {{song.price}}</span>
-                            </div>
-                        </div>
-                        <div class="song add-song" ng-click="goToAddSong()">
-                            <div class="add-song-icon">+</div>
-                        </div>        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted">© 2024 MyPage. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- 충전 모달 -->
-    <div id="chargeModal" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog">
-            <!-- 모달 내용-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">충전하기</h4>
-                </div>
-                <div class="modal-body">
-                    <p>현재 보유 포인트: {{user.point}}</p>
-                    <p>연결 계좌: {{user.account_number}}</p>
-                    <p>잔액: {{user.account_money}}</p>
-                    <div class="form-group">
-                        <label for="chargeAmount">충전 금액:</label>
-                        <input type="number" class="form-control" id="chargeAmount" ng-model="chargeAmount" placeholder="충전 금액을 입력하세요">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="charge()">충전하기</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 환전 모달 -->
-    <div id="exchangeModal" class="modal fade" role="dialog" data-backdrop="static">
-        <div class="modal-dialog">
-            <!-- 모달 내용-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">환전하기</h4>
-                </div>
-                <div class="modal-body">
-                    <p>현재 보유 포인트: {{user.point}}</p>
-                    <p>연결 계좌: {{user.account_number}}</p>
-                    <p>환전 가능 포인트: {{user.point}}</p>
-                    <div class="form-group">
-                        <label for="exchangeAmount">환전 금액:</label>
-                        <input type="number" class="form-control" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="exchange()">환전하기</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-<script>
-    var app = angular.module('application', []);
-    app.controller('MypageCtrl', function($scope, appFactory){
-        var urlParams = new URLSearchParams(window.location.search);
-        var userId = urlParams.get('userId');
-
-        // userId로 사용자 정보 로드
-        if(userId){
-            appFactory.queryAB(userId, function(data){
-                $scope.user = JSON.parse(data);
-                $scope.user.profilePicture = 'https://via.placeholder.com/150';
-                $scope.user.songs = [
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 1', price: '10,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 2', price: '20,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 3', price: '15,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 4', price: '25,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 5', price: '30,000원'}
-                ];
-            });
+        html {
+            position: relative;
+            overflow-x: hidden !important;
         }
 
-        $scope.charge = function() {
-            var chargeAmount = $scope.chargeAmount;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-            if (chargeAmount && chargeAmount > 0) {
-                appFactory.chargeAB({ userId: $scope.user.id, amount: chargeAmount }, function(response) {
-                    if (response.status === 200) {
-                        // 성공적으로 충전이 완료되었을 때, 사용자 정보를 다시 로드합니다.
-                        appFactory.queryAB($scope.user.id, function(data){
-                            $scope.user = JSON.parse(data);
-                        });
-                        Swal.fire({
-                          title: '충전 완료',
-                          text: '충전이 완료되었습니다.',
-                          icon: 'success',
-                        }).then(function() {
-                            $('#chargeModal').modal('hide');
-                        });
-                    } else {
-                        alert('충전 실패: ' + response.data);
-                    }
-                });
-            } else {
-                alert('올바른 금액을 입력하세요.');
-            }
-        };
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: #324e63;
+            background: #f7f9fc;
+            line-height: 1.6;
+        }
 
-        $scope.exchange = function() {
-            var exchangeAmount = $scope.exchangeAmount;
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
 
-            if (exchangeAmount && exchangeAmount > 0) {
-                appFactory.exchangeAB({ userId: $scope.user.id, amount: exchangeAmount }, function(response) {
-                    if (response.status === 200) {
-                        // 성공적으로 환전이 완료되었을 때, 사용자 정보를 다시 로드합니다.
-                        appFactory.queryAB($scope.user.id, function(data){
-                            $scope.user = JSON.parse(data);
-                        });
-                        Swal.fire({
-                          title: '환전 완료',
-                          text: '환전이 완료되었습니다.',
-                          icon: 'success',
-                        }).then(function() {
-                            $('#exchangeModal').modal('hide');
-                        });
-                    } else {
-                        alert('환전 실패: ' + response.data);
-                    }
-                });
-            } else {
-                alert('올바른 금액을 입력하세요.');
-            }
-        };
-    });
+        h2 {
+            text-align: center;
+            color: #4491a8;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
 
-    app.factory('appFactory', function($http){
-        var factory = {};
+        .form-group label {
+            font-size: 18px;
+            color: #324e63;
+        }
 
-        factory.queryAB = function(name, callback){
-            $http.get('/query?name='+name).success(function(output){
-                callback(output);
-            });
-        };
+        .form-control {
+            font-size: 16px;
+            border-radius: 6px;
+        }
 
-        factory.chargeAB = function(data, callback) {
-            $http.get('/charge?userId=' + data.userId + '&amount=' + data.amount).then(function(response) {
-                callback(response);
-            });
-        };
+        .btn {
+            font-size: 18px;
+            background-color: #4491a8;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-        factory.exchangeAB = function(data, callback) {
-            $http.get('/exchange?userId=' + data.userId + '&amount=' + data.amount).then(function(response) {
-                callback(response);
-            });
-        };
+        .btn:hover {
+            background-color: #367a90;
+        }
+    </style>
+</head>
 
-        return factory;
-    });
+<body>
+    <div class="container">
+        <h2>음원 등록 / 수정</h2>
+        <form id="registerForm" action="http://localhost:8001/registerMusic" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>음원명</label>
+                <input class="form-control" type="text" name="songName" required>
+            </div>
+            <div class="form-group">
+                <label>장르</label>
+                <input class="form-control" type="text" name="genre" required>
+            </div>
+            <div class="form-group">
+                <label>곡 정보</label>
+                <textarea class="form-control" name="songInfo" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>가사</label>
+                <textarea class="form-control" name="lyrics" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>음원 파일</label>
+                <input class="form-control" type="file" name="audioFile" required>
+            </div>
+            <div class="form-group">
+                <label>이미지 파일</label>
+                <input class="form-control" type="file" name="imageFile" required>
+            </div>
+            <div class="form-group">
+                <label>판매 금액</label>
+                <input class="form-control" type="text" name="price" required>
+            </div>
+            <button type="submit" class="btn btn-primary">등록하기</button>
+        </form>
+    </div>
+</body>
 
-    var messageBox = document.querySelector('.js-message');
-    var btn = document.querySelector('.js-message-btn');
-    var card = document.querySelector('.js-profile-card');
-    var closeBtn = document.querySelectorAll('.js-message-close');
-
-    btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        card.classList.add('active');
-    });
-
-    closeBtn.forEach(function (element, index) {
-        element.addEventListener('click', function (e) {
-            e.preventDefault();
-            card.classList.remove('active');
-        });
-    });
-
-</script>
 </html>

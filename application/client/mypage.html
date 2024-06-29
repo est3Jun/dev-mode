@@ -8,11 +8,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="mypage.js"></script>
     <link rel="stylesheet" href="mypage.css">
 </head>
 <body ng-app="application" ng-controller="MypageCtrl">
+    
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -66,6 +67,9 @@
                 <div class="my-songs">
                     <h3>나의 음원</h3>
                     <div class="song-list">
+                        <div class="song add-song" data-toggle="modal" data-target="#registerModal">
+                            <div class="add-song-icon">+</div>
+                        </div>
                         <div class="song" ng-repeat="song in user.songs">
                             <img ng-src="{{song.cover}}" alt="음원 표지">
                             <div class="song-details">
@@ -73,10 +77,6 @@
                                 <span>거래금액: {{song.price}}</span>
                             </div>
                         </div>
-                        <div class="song add-song" ng-click="goToAddSong()">
-                            <div class="add-song-icon">+</div>
-                        </div>
-        
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                     <p>잔액: {{user.account_money}}</p>
                     <div class="form-group">
                         <label for="chargeAmount">충전 금액:</label>
-                        <input type="number" class="form-control" id="chargeAmount" ng-model="chargeAmount" placeholder="충전 금액을 입력하세요">
+                        <input class="form-control" type="number" id="chargeAmount" ng-model="chargeAmount" placeholder="충전 금액을 입력하세요" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -130,7 +130,7 @@
                     <p>환전 가능 포인트: {{user.point}}</p>
                     <div class="form-group">
                         <label for="exchangeAmount">환전 금액:</label>
-                        <input type="number" class="form-control" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요">
+                        <input class="form-control" type="number" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -140,8 +140,52 @@
             </div>
         </div>
     </div>
-    
-    
+
+    <!-- 음원 등록 모달 -->
+    <div id="registerModal" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <!-- 모달 내용-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">음원 등록 / 수정</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm" action="http://localhost:8001/registerMusic" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>음원명</label>
+                            <input class="form-control" type="text" name="songName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>장르</label>
+                            <input class="form-control" type="text" name="genre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>곡 정보</label>
+                            <textarea class="form-control" name="songInfo" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>가사</label>
+                            <textarea class="form-control" name="lyrics" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>음원 파일</label>
+                            <input class="form-control" type="file" name="audioFile" required>
+                        </div>
+                        <div class="form-group">
+                            <label>이미지 파일</label>
+                            <input class="form-control" type="file" name="imageFile" required>
+                        </div>
+                        <div class="form-group">
+                            <label>판매 금액</label>
+                            <input class="form-control" type="text" name="price" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">등록하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     var app = angular.module('application', []);
@@ -257,6 +301,5 @@
             card.classList.remove('active');
         });
     });
-
 </script>
 </html>
