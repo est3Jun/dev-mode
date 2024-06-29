@@ -73,6 +73,10 @@
                                 <span>거래금액: {{song.price}}</span>
                             </div>
                         </div>
+                        <div class="song add-song" ng-click="goToAddSong()">
+                            <div class="add-song-icon">+</div>
+                        </div>
+        
                     </div>
                 </div>
             </div>
@@ -136,6 +140,8 @@
             </div>
         </div>
     </div>
+    
+    
 </body>
 <script>
     var app = angular.module('application', []);
@@ -148,13 +154,13 @@
             appFactory.queryAB(userId, function(data){
                 $scope.user = JSON.parse(data);
                 $scope.user.profilePicture = 'https://via.placeholder.com/150';
-                $scope.user.songs = [
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 1', price: '10,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 2', price: '20,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 3', price: '15,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 4', price: '25,000원'},
-                    {cover: 'https://via.placeholder.com/150x150', title: 'Song 5', price: '30,000원'}
-                ];
+                // $scope.user.songs = [
+                //     {cover: 'https://via.placeholder.com/150x150', title: 'Song 1', price: '10,000원'},
+                //     {cover: 'https://via.placeholder.com/150x150', title: 'Song 2', price: '20,000원'},
+                //     {cover: 'https://via.placeholder.com/150x150', title: 'Song 3', price: '15,000원'},
+                //     {cover: 'https://via.placeholder.com/150x150', title: 'Song 4', price: '25,000원'},
+                //     {cover: 'https://via.placeholder.com/150x150', title: 'Song 5', price: '30,000원'}
+                // ];
             });
         }
 
