@@ -1,0 +1,140 @@
+header{
+    background-color: lightgray;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+  }
+  header, .form-group{
+    margin-bottom: 3%;
+  }
+  .form-group{
+    width: 50%;
+  }
+  #body{
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  .form-control{
+    margin: 8px;
+  }
+  label{
+    font-size: 20px;
+  }
+  #search{
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+  .container{
+    float: left;
+  }
+  .container1{
+    float: left;
+  }
+  body {
+    padding-top: 150px;
+  }
+  .search-bar {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 955px;
+    display: flex;
+    justify-content: left;
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+  .login-form {
+    flex: 1;
+    padding: 1px;
+    width: 15%;
+    float: right;
+  }
+  
+  .button-form {
+    float: right;
+  }
+  .user-profile {
+    flex: 1;
+    padding: 1px;
+    float:right;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 20px; /* Adjust the margin as needed */
+  }
+  .user-profile img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  .user-profile .dropdown {
+    display: inline-block;
+  }
+  .user-profile .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+  
+  .swiper {
+    width: 20%;
+    height: 20%;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+  }
+  .container2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    float: left;
+  }
+  .album-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 40px;
+  }
+  
+  .album-item {
+    flex: 0 0 18%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 10px;
+  }
+  
+  .album-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .album-item img {
+    width: 100%;
+    height: auto;
+  }
+  footer {
+    background-color: lightgray;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
