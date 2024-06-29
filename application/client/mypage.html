@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="mypage.js"></script>
+    <link rel="stylesheet" href="mypage.css">
+</head>
+<body ng-app="application" ng-controller="MypageCtrl">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">MyPage</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-card js-profile-card">
+                    <div class="profile-card__img">
+                        <img ng-src="{{user.profilePicture}}" alt="프로필 사진">
+                    </div>
+                    <div class="profile-card__cnt js-profile-cnt">
+                        <div class="profile-card__name">{{user.name}}</div>
+                        <div class="profile-card__txt">전화번호: {{user.phone_number}}</div>                
+                    </div>
+                    <div class="profile-card-inf">
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.id}}</div>
+                            <div class="profile-card-inf__txt">아이디</div>
+                        </div>
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.account_number}}</div>
+                            <div class="profile-card-inf__txt">계좌번호</div>
+                        </div>
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.account_money}}</div>
+                            <div class="profile-card-inf__txt">잔액</div>
+                        </div>
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title">{{user.point}}</div>
+                            <div class="profile-card-inf__txt">포인트</div>
+                        </div>
+                    </div>
+
+            <div class="profile-card-ctr">
+                <button class="profile-card__button button--blue js-message-btn" data-toggle="modal" data-target="#chargeModal">충전하기</button>
+                <button class="profile-card__button button--orange" data-toggle="modal" data-target="#exchangeModal">환전하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 충전 모달 -->
+    <div id="chargeModal" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <!-- 모달 내용-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">충전하기</h4>
+                </div>
+                <div class="modal-body">
+                    <p>현재 보유 포인트: {{user.point}}</p>
+                    <p>연결 계좌: {{user.account_number}}</p>
+                    <p>잔액: {{user.account_money}}</p>
+                    <div class="form-group">
+                        <label for="chargeAmount">충전 금액:</label>
+                        <input type="number" class="form-control" id="chargeAmount" ng-model="chargeAmount" placeholder="충전 금액을 입력하세요">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="charge()">충전하기</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 환전 모달 -->
+    <div id="exchangeModal" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <!-- 모달 내용-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">환전하기</h4>
+                </div>
+                <div class="modal-body">
+                    <p>현재 보유 포인트: {{user.point}}</p>
+                    <p>연결 계좌: {{user.account_number}}</p>
+                    <p>환전 가능 포인트: {{user.point}}</p>
+                    <div class="form-group">
+                        <label for="exchangeAmount">환전 금액:</label>
+                        <input type="number" class="form-control" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="my-songs">
+            <h3>나의 음원</h3>
+            <div class="song-list">
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 1">
+                    <div class="song-details">
+                        <p>Song 1</p>
+                        <span>거래금액: 10,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 2">
+                    <div class="song-details">
+                        <p>Song 2</p>
+                        <span>거래금액: 20,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 3">
+                    <div class="song-details">
+                        <p>Song 3</p>
+                        <span>거래금액: 15,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 4">
+                    <div class="song-details">
+                        <p>Song 4</p>
+                        <span>거래금액: 25,000원</span>
+                    </div>
+                </div>
+                <div class="song">
+                    <img src="https://via.placeholder.com/150x150" alt="음원 표지 5">
+                    <div class="song-details">
+                        <p>Song 5</p>
+                        <span>거래금액: 30,000원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">© 2024 MyPage. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <svg hidden="hidden">
+        <defs>
+            <symbol id="icon-location" viewBox="0 0 32 32">
+                <title>location</title>
+                <path d="M16 31.68c-0.352 0-0.672-0.064-1.024-0.16-0.8-0.256-1.44-0.832-1.824-1.6l-6.784-13.632c-1.664-3.36-1.568-7.328 0.32-10.592 1.856-3.2 4.992-5.152 8.608-5.376h1.376c3.648 0.224 6.752 2.176 8.608 5.376 1.888 3.264 2.016 7.232 0.352 10.592l-6.816 13.664c-0.288 0.608-0.8 1.12-1.408 1.408-0.448 0.224-0.928 0.32-1.408 0.32zM15.392 2.368c-2.88 0.192-5.408 1.76-6.912 4.352-1.536 2.688-1.632 5.92-0.288 8.672l6.816 13.632c0.128 0.256 0.352 0.448 0.64 0.544s0.576 0.064 0.832-0.064c0.224-0.096 0.384-0.288 0.48-0.48l6.816-13.664c1.376-2.752 1.248-5.984-0.288-8.672-1.472-2.56-4-4.128-6.88-4.32h-1.216zM16 17.888c-3.264 0-5.92-2.656-5.92-5.92 0-3.232 2.656-5.888 5.92-5.888s5.92 2.656 5.92 5.92c0 3.264-2.656 5.888-5.92 5.888zM16 8.128c-2.144 0-3.872 1.728-3.872 3.872s1.728 3.872 3.872 3.872 3.872-1.728 3.872-3.872c0-2.144-1.76-3.872-3.872-3.872z"></path>
+            </symbol>
+        </defs>
+    </svg>
+</body>
+<script>
+    var app = angular.module('application', []);
+    app.controller('MypageCtrl', function($scope, appFactory){
+        var urlParams = new URLSearchParams(window.location.search);
+        var userId = urlParams.get('userId');
+
+        // userId로 사용자 정보 로드
+        if(userId){
+            appFactory.queryAB(userId, function(data){
+                $scope.user = JSON.parse(data);
+                $scope.user.profilePicture = 'https://via.placeholder.com/150';
+            });
+        }
+
+        $scope.charge = function() {
+            var chargeAmount = $scope.chargeAmount;
+
+            if (chargeAmount && chargeAmount > 0) {
+                appFactory.chargeAB({ userId: $scope.user.id, amount: chargeAmount }, function(response) {
+                    if (response.status === 200) {
+                        // 성공적으로 충전이 완료되었을 때, 사용자 정보를 다시 로드합니다.
+                        appFactory.queryAB($scope.user.id, function(data){
+                            $scope.user = JSON.parse(data);
+                        });
+                        Swal.fire({
+                          title: '충전 완료',
+                          text: '충전이 완료되었습니다.',
+                          icon: 'success',
+                        }).then(function() {
+                            $('#chargeModal').modal('hide');
+                        });
+                    } else {
+                        alert('충전 실패: ' + response.data);
+                    }
+                });
+            } else {
+                alert('올바른 금액을 입력하세요.');
+            }
+        };
+
+        $scope.exchange = function() {
+            var exchangeAmount = $scope.exchangeAmount;
+
+            if (exchangeAmount && exchangeAmount > 0) {
+                appFactory.exchangeAB({ userId: $scope.user.id, amount: exchangeAmount }, function(response) {
+                    if (response.status === 200) {
+                        // 성공적으로 환전이 완료되었을 때, 사용자 정보를 다시 로드합니다.
+                        appFactory.queryAB($scope.user.id, function(data){
+                            $scope.user = JSON.parse(data);
+                        });
+                        Swal.fire({
+                          title: '환전 완료',
+                          text: '환전이 완료되었습니다.',
+                          icon: 'success',
+                        }).then(function() {
+                            $('#exchangeModal').modal('hide');
+                        });
+                    } else {
+                        alert('환전 실패: ' + response.data);
+                    }
+                });
+            } else {
+                alert('올바른 금액을 입력하세요.');
+            }
+        };
+    });
+
+    app.factory('appFactory', function($http){
+        var factory = {};
+
+        factory.queryAB = function(name, callback){
+            $http.get('/query?name='+name).success(function(output){
+                callback(output);
+            });
+        };
+
+        factory.chargeAB = function(data, callback) {
+            $http.get('/charge?userId=' + data.userId + '&amount=' + data.amount).then(function(response) {
+                callback(response);
+            });
+        };
+
+        factory.exchangeAB = function(data, callback) {
+            $http.get('/exchange?userId=' + data.userId + '&amount=' + data.amount).then(function(response) {
+                callback(response);
+            });
+        };
+
+        return factory;
+    });
+
+    var messageBox = document.querySelector('.js-message');
+    var btn = document.querySelector('.js-message-btn');
+    var card = document.querySelector('.js-profile-card');
+    var closeBtn = document.querySelectorAll('.js-message-close');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+    });
+
+    closeBtn.forEach(function (element, index) {
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            card.classList.remove('active');
+        });
+    });
+
+    
+</script>
+</html>

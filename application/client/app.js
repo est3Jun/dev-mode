@@ -3,21 +3,32 @@
 var app = angular.module('application', []);
 
 app.controller('AppCtrl', function($scope, appFactory){
-   $("#success_init").hide();
+   $("#success_register").hide();
+   $("#success_login").hide();
    $("#success_qurey").hide();
    $("#success_delete").hide();
    $("#success_transfer").hide();
    $("#success_searchadmin").hide();
 
-   $scope.initAB = function(){
-       appFactory.initAB($scope.abstore, function(data){
+   $scope.registerAB = function(){
+       appFactory.registerAB($scope.abstore, function(data){
            if(data == "")
-           $scope.init_ab = "success";
-           $("#success_init").show();
+           $scope.register_ab = "success";
+           $("#success_register").show();
        });
    };
+   $scope.loginAB = function(){
+    appFactory.loginAB($scope.login, function(data){
+        if(data == "Login successful"){
+            // 로그인 성공 시 mypage.html로 리디렉션
+            window.location.href = `mypage.html?userId=${$scope.login.userId}`;
+        }
+        $scope.login_ab = "login success";
+        $("#success_login").show();
+    });
+};
    $scope.queryAB = function(){
-       appFactory.queryAB($scope.walletid, function(data){
+        appFactory.queryAB($scope.walletid, function(data){
            $scope.query_ab = data;
            $("#success_qurey").show();
        });
@@ -47,11 +58,17 @@ app.factory('appFactory', function($http){
       
     var factory = {};
  
-    factory.initAB = function(data, callback){
-        $http.get('/init?a='+data.a+'&aval='+data.aval).success(function(output){
+    factory.registerAB = function(data, callback){
+        $http.get('/register?name='+data.name+'&id='+data.id+'&pw='+data.pw+'+&phone_number='+data.phone_number+'&account_number='+data.account_number+'&account_money='+data.account_money).success(function(output){
             callback(output)
         });
     }
+    factory.loginAB = function(data, callback) {
+        $http.get('/login?userId=' + data.userId + '&userPw=' + data.userPw).success(function(output) {
+            callback(output)
+        });
+    };
+    
     factory.queryAB = function(name, callback){
         $http.get('/query?name='+name).success(function(output){
             callback(output)

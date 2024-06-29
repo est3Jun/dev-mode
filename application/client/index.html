@@ -1,138 +1,101 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Test Name_ soundblock</title>
+ <head>
+   <title>Hyperledger Fabric AB Store</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-</head>
-<body ng-app="application" ng-controller="AppCtrl">
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container1">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">엄준식</a></li>
-          <li><a href="#">버튼2</a></li>
-          <li><a href="#">버튼3</a></li>
-          <div class="container search-bar">
-            <div class="search-bar">
-              <a class="navbar-brand" href="">SoundBlock</a>
-              <input type="text" class="form-control" placeholder="검색어를 입력하세요" aria-label="검색어">
-              <button class="btn btn-outline-secondary" type="button">검색</button>
-            </div>
-          </div>
-        </ul>
-        <div class="login-form">
-          <input type="text" class="form-control" placeholder="아이디" id="navbar-inputID">
-          <input type="password" class="form-control" placeholder="비밀번호" id="navbar-inputPassword">
-          <div class="button-form">
-            <button type="submit" onClick="location.href='userlogin.html'" class="btn btn-primary">로그인</button>
-            <button type="submit" class="btn btn-primary">회원가입</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="https://wimg.mk.co.kr/meet/neds/2019/11/image_readtop_2019_937818_15736086053974580.jpg" alt=""></div>
-      <div class="swiper-slide"><img src="https://image.fnnews.com/resource/media/image/2018/09/07/201809070304411201_l.jpg" alt=""></div>
-      <div class="swiper-slide">1234</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
-  </div>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <style type="text/css">
+     header{
+       background-color: lightgray;
+       font-size:20px;
+       padding:20px;
+     }
+     header, .form-group{
+       margin-bottom: 3%;
+     }
+     .form-group{
+       width:50%;
+     }
+     #body{
+       margin-left:3%;
+       margin-right:3%;
+     }
+     .form-control{
+       margin: 8px;
+     }
+     label{
+       font-size:20px;
+     }
+   </style>
+ </head>
+ <body ng-app="application" ng-controller="AppCtrl">
+    <header>
+      <div id="left_header">Hyperledger Fabric AB Store Application</div>
+    </header>
+    <div id="body">
+      <div class="form-group">
+        <label>Register</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_register">{{register_ab}}</h5>
+        <br>
+        Name: <input class="form-control" type="text" placeholder="Ex: Hyper" ng-model="abstore.name">
+        ID: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="abstore.id">
+        PW: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="abstore.pw">
+        Phone_Number: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="abstore.phone_number">
+        Account_Number: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="abstore.account_number">
+        Account_Money: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="abstore.account_money">
+        <input id="registerAB" type="submit" value="Create" class="btn btn-primary" ng-click="registerAB()">
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label>Login</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_login">{{login_ab}}</h5>
+        <br>
+        ID: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="login.userId">
+        PW: <input class="form-control" type="text" placeholder="Ex: 100" ng-model="login.userPw">
+        <input id="loginAB" type="submit" value="Login" class="btn btn-primary" ng-click="loginAB()">
+        <br>
+    </div>
+
+      <hr>
+      <div class="form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_qurey">{{query_ab}}</h5>
+        <label>User</label>
+        <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="walletid">
+        <input id="queryAB" type="submit" value="Search" class="btn btn-primary" ng-click="queryAB()"></p>
+      </div>
+      <div class = "form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_searchadmin">{{search_admin}}</h5>
+        <label>Admin</label>
+        <p><input id="searchAdmin" type="submit" value="Search" class="btn btn-primary" ng-click="searchAdmin()"></p>
+      </div>
+
+      <div class="form-group">
+        <h5 style="color:green;margin-bottom:2%" id="delete_query">{{delete_ab}}</h5>
+        <label>Delete</label>
+        <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="delete.a">
+        <input id="deleteAB" type="submit" value="Delete" class="btn btn-primary" ng-click="deleteAB()"></p>
+      </div>
+
+      <div class = "form-group">
+        <h5 style="color:green;margin-bottom:2%" id="success_transfer">{{transfer_ab}}</h5>
+        <label>Sender</label>
+        <p><input class="form-control" type="text" placeholder="Ex: A" ng-model="transfer.sender">
+        <label>Receiver</label>
+        <input class="form-control" type="text" placeholder="Ex: A" ng-model="transfer.receiver">
+        <label>Amount</label>
+        <input class="form-control" type="text" placeholder="Ex: 123" ng-model="transfer.amount">
+        <input id="transferAB" type="submit" value="Transfer" class="btn btn-primary" ng-click="transferAB()"></p>
+      </div>
+      
+      
+
+    </div>
+  </body>
+  <script type="text/javascript" src="app.js"> </script>
+ </html>
  
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper(".mySwiper", {
-      spaceBetween: 30,
-      centeredSlides: true,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  </script>
-  <div class="container2">
-    <h2>최신 음악</h2>
-    <div class="album-container">
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 1">
-            <div class="album-title">지민 & 로꼬</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 2">
-            <div class="album-title">리사 (LISA)</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 3">
-            <div class="album-title">COCONA</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 4">
-            <div class="album-title">오시영</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 5">
-            <div class="album-title">Imagine Dragons</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 6">
-            <div class="album-title">KATSEYE</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 7">
-            <div class="album-title">B-Free & Hukky Shibaseki</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 8">
-            <div class="album-title">kenessi</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 9">
-            <div class="album-title">BÉBE YANA & Closet Yi</div>
-        </div>
-        <div class="album-item">
-            <img src="https://via.placeholder.com/150" alt="Album 10">
-            <div class="album-title">Men's Tear</div>
-        </div>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2024 SoundBlock. All rights reserved.</p>
-  </footer>
-</body>
-<script type="text/javascript" src="app.js"></script>
-</html>
