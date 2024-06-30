@@ -214,6 +214,7 @@
         };
     });
 
+<<<<<<< Updated upstream
     app.factory('appFactory', function($http){
         var factory = {};
 
@@ -254,6 +255,44 @@
             card.classList.remove('active');
         });
     });
+=======
+<body>
+    <div class="container">
+        <h2>음원 등록 / 수정</h2>
+        <form id="registerForm" action="http://localhost:8001/registerMusic" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>음원명</label>
+                <input class="form-control" type="text" name="id" required>
+            </div>
+            <div class="form-group">
+                <label>제목</label>
+                <input class="form-control" type="text" name="title" required>
+            </div>
+            <div class="form-group">
+                <label>장르</label>
+                <input class="form-control" type="text" name="genre" required>
+            </div>
+            <div class="form-group">
+                <label>곡 정보</label>
+                <textarea class="form-control" name="info" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>가사</label>
+                <textarea class="form-control" name="lyrics" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>음원 파일</label>
+                <input class="form-control" type="file" name="audioFile" required>
+            </div>
+            <div class="form-group">
+                <label>이미지 파일</label>
+                <input class="form-control" type="file" name="imageFile" required>
+            </div>
+            <button type="submit" class="btn btn-primary">등록하기</button>
+        </form>
+    </div>
+</body>
+>>>>>>> Stashed changes
 
 </script>
 </html>
