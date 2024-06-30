@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const Nano = require('nano');
+const multer = require('multer');
 const crypto = require('crypto');
 const sdk = require('./sdk');
 
@@ -18,6 +19,8 @@ const userDbName = 'channel1_abstore';
 const musicDbName = 'music_database';
 const userDb = nano.db.use(userDbName);
 const musicDb = nano.db.use(musicDbName);
+
+const upload = multer({ dest: 'uploads/' });
 
 async function createDBs() {
   try {
@@ -78,6 +81,75 @@ async function createDesignDoc() {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.post('/registerMusic', upload.fields([{ name: 'audioFile', maxCount: 1 }, { name: 'imageFile', maxCount: 1 }]), async function (req, res) {
+  try {
+    console.log('Registering music:', req.body);
+    if (!req.files || !req.files['audioFile'] || !req.files['imageFile']) {
+      throw new Error('Files are not properly uploaded');
+    }
+
+    const userId = req.body.userID;
+
+    if (!userId) {
+      return res.status(400).json({ error: 'Invalid parameters', details: 'Missing userID' });
+    }
+
+    const user = await userDb.get(userId);
+    if (!user) {
+      return res.status(400).json({ error: '회원 ID가 유효하지 않습니다.' });
+    }
+
+    const song = {
+      songName: req.body.songName,
+      genre: req.body.genre,
+      songInfo: req.body.songInfo,
+      lyrics: req.body.lyrics,
+      price: req.body.price,
+      audioFile: req.files['audioFile'][0].path,
+      imageFile: req.files['imageFile'][0].path,
+      userID: userId
+    };
+
+    const songArgs = [
+      song.userID,
+      song.songName,
+      song.genre,
+      song.songInfo,
+      song.lyrics,
+      song.price.toString(),
+      song.audioFile,
+      song.imageFile
+    ];
+
+    // Chaincode 호출
+    sdk.send(false, 'registerMusic', songArgs, res, async (response) => {
+      if (response.status === 'SUCCESS' || response.success) {
+        console.log('Chaincode transaction successful:', response.message);
+        // CouchDB에 데이터 삽입
+        try {
+          const dbResponse = await musicDb.insert({
+            _id: generateUniqueId('song'),
+            type: 'song',
+            ...song
+          });
+          console.log('Document inserted into music_database:', dbResponse);
+          res.status(200).json({ message: '음원 등록이 성공적으로 완료되었습니다.' });
+        } catch (dbError) {
+          console.error('Error inserting document into CouchDB:', dbError);
+          res.status(500).json({ error: '음원 등록 중 오류가 발생했습니다.', details: dbError.message });
+        }
+      } else {
+        console.error('Chaincode transaction failed:', response.message);
+        res.status(500).json({ error: '음원 등록 중 오류가 발생했습니다.', details: response.message });
+      }
+    });
+
+  } catch (error) {
+    console.error('Error processing request:', error);
+    res.status(500).json({ error: '음원 등록 중 오류가 발생했습니다.', details: error.message });
+  }
+});
 
 app.get('/register', function (req, res) {
   let name = req.query.name;
@@ -153,3 +225,7 @@ createDBs().then(() => {
 }).catch(error => {
   console.error('Error setting up databases:', error);
 });
+
+function generateUniqueId(prefix) {
+  return `${prefix}:${crypto.randomBytes(16).toString('hex')}`;
+}

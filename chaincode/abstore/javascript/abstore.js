@@ -283,6 +283,34 @@ const ABstore = class {
     console.info(response);
     return Avalbytes;
   }
+
+  async registerMusic(stub, args) {
+    if (args.length != 8) { // 필요한 인자 수로 업데이트
+      return shim.error('Incorrect number of arguments. Expecting 8');
+    }
+
+    let song = {
+      type: "song",
+      userID: args[0].trim(),
+      songName: args[1].trim(),
+      genre: args[2].trim(),
+      songInfo: args[3].trim(),
+      lyrics: args[4].trim(),
+      price: parseInt(args[5].trim()),
+      audioFile: args[6].trim(),
+      imageFile: args[7].trim()
+      };
+
+    console.info(`Attempting to register song: ${JSON.stringify(song)}`);
+
+    if (isNaN(song.price) || song.price < 0) {
+      throw new Error('Expecting non-negative integer value for price');
+    }
+
+    await stub.putState(song.songName, Buffer.from(JSON.stringify(song)));
+
+    console.info(`Registered song ${song.songName} with ID ${song.songName}`);
+  }
 };
 
 shim.start(new ABstore());

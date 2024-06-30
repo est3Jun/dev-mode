@@ -90,22 +90,3 @@ app.factory('appFactory', function($http){
 
     return factory;
 });
-
-var messageBox = document.querySelector('.js-message');
-var btn = document.querySelector('.js-message-btn');
-var card = document.querySelector('.js-profile-card');
-var closeBtn = document.querySelectorAll('.js-message-close');
-
-btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    card.classList.add('active');
-});
-
-closeBtn.forEach(function (element, index) {
-    element.addEventListener('click', function (e) {
-        e.preventDefault();
-        card.classList.remove('active');
-    });
-});
-
-
