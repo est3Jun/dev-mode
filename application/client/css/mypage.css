@@ -2,7 +2,7 @@
 
 html {
   position: relative;
-  overflow-x: hidden!important;
+  overflow-x: hidden !important;
 }
 
 * {
@@ -46,7 +46,7 @@ a, a:hover {
   text-align: center;
   color: #fff;
   position: relative;
-  bottom: 0;
+  margin-top: 40px;
   width: 100%;
 }
 
@@ -56,14 +56,12 @@ a, a:hover {
 
 .profile-card {
   width: 100%;
-  height: 780px;
   margin: 20px 0;
   padding: 20px;
   box-shadow: 0 8px 60px -10px rgba(13, 28, 39, 0.6);
   background: #fff;
   border-radius: 12px;
   text-align: center;
-  overflow-y: auto; /* 스크롤 추가 */
 }
 
 .profile-card__img {
@@ -101,7 +99,7 @@ a, a:hover {
 
 .profile-card-inf {
   display: flex;
-  flex-direction: column; /* 세로로 나열 */
+  justify-content: space-between;
   margin-top: 20px;
 }
 
@@ -173,8 +171,6 @@ a, a:hover {
   border-radius: 12px;
   margin-top: 20px;
   text-align: center;
-  height: 780px;
-  overflow-y: auto; /* 스크롤 추가 */
 }
 
 .my-songs h3 {
@@ -185,14 +181,15 @@ a, a:hover {
 
 .song-list {
   display: flex;
-  flex-direction: column; /* 세로로 나열 */
-  gap: 20px; /* 카드 간격을 설정 */
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .song {
   display: flex;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;  /* 세로로 나열 */
+  align-items: center;  /* 중앙 정렬 */
+  width: calc(33.33% - 20px); /* 3개의 카드를 한 줄에 배치 */
   padding: 10px;
   background: #fff;
   border-radius: 8px;
@@ -204,13 +201,14 @@ a, a:hover {
   height: 100px;
   border-radius: 10px;
   object-fit: cover;
-  margin-right: 20px;
+  margin-bottom: 10px;  /* 아래쪽 여백 */
 }
 
 .song-details {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  width: 100%;
 }
 
 .song-details p {
@@ -225,23 +223,57 @@ a, a:hover {
   color: #666;
 }
 
+.song-details .btn {
+  margin: 5px 5px 5px 0;
+  width: 45%; /* 버튼 너비 조정 */
+  display: inline-block;
+  font-size: 14px; /* 버튼 글씨 크기 조정 */
+  padding: 6px 12px; /* 버튼 패딩 조정 */
+}
+
+.song-details .btn-warning {
+  margin-right: 10px;
+}
+
+.song-details .button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* 삭제 모달 스타일 */
+#deleteModal .modal-dialog {
+  width: 80%;
+  max-width: 800px;
+  margin: 100px auto; /* 화면 중앙에 위치 */
+}
+
+#deleteModal .modal-content {
+  text-align: center;
+  padding: 20px;
+}
+
+#deleteModal .modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+
+
 .add-song {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px;
-  background: #d3d3d3; /* 회색 배경 */
-  border-radius: 8px;
+  height: 100px;
+  background: #dcdcdc;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s;
-}
-
-.add-song:hover {
-  background: #b3b3b3; /* hover 효과 */
+  font-size: 48px;
+  color: #4491a8;
+  margin-top: 20px;  /* 위쪽 여백 */
 }
 
 .add-song-icon {
   font-size: 48px;
-  color: #fff;
 }

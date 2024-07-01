@@ -1,13 +1,10 @@
-/* 구글 폰트 임포트 */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-/* 바디 스타일링 */
 body {
-    background: #ffffff;
+    background: #e0f7fa; /* 밝은 청록색 배경 */
     font-family: 'Open Sans', sans-serif;
 }
 
-/* 헤더 스타일링 */
 header {
     background-color: #f8f9fa;
     text-align: center;
@@ -15,15 +12,14 @@ header {
 }
 
 header img {
-    width: 100%; /* 너비 조정 */
-    height: 200px; /* 높이는 자동으로 설정 */
+    width: 100%;
+    height: 220px;
 }
 
-/* 메뉴바 스타일링 */
 .navbar {
     display: flex;
     justify-content: center;
-    background-color: #4491a8;
+    background: linear-gradient(45deg, #0288d1, #03a9f4); /* 시원한 청색 그라데이션 */
     overflow: hidden;
 }
 
@@ -33,15 +29,14 @@ header img {
     text-align: center;
     padding: 14px 50px;
     text-decoration: none;
-    margin: 0 10px; /* 메뉴바 아이템 사이에 간격 추가 */
+    margin: 0 10px;
 }
 
 .navbar a:hover {
-    background-color: #fffdfd;
-    color: black;
+    background-color: #b3e5fc; /* 연한 하늘색 */
+    color: #0288d1;
 }
 
-/* 검색 바 스타일링 */
 .search-bar {
     margin: 20px 0;
     text-align: center;
@@ -56,24 +51,24 @@ header img {
 
 .searchTerm {
     width: 30%;
-    border: 3px solid #00B4CC;
+    border: 3px solid #0288d1;
     border-right: none;
     padding: 10px;
     height: 36px;
     border-radius: 5px 0 0 5px;
     outline: none;
-    color: #9DBFAF;
+    color: #0288d1;
 }
 
 .searchTerm:focus {
-    color: #00B4CC;
+    color: #0288d1;
 }
 
 .searchButton {
     width: 40px;
     height: 36px;
-    border: 1px solid #00B4CC;
-    background: #00B4CC;
+    border: 1px solid #0288d1;
+    background: #0288d1;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -81,7 +76,6 @@ header img {
     font-size: 20px;
 }
 
-/* 캐러셀과 사용자 정보 컨테이너 스타일링 */
 .carousel-container {
     display: flex;
     align-items: center;
@@ -92,16 +86,14 @@ header img {
 
 .carousel {
     width: 70%;
-    margin-right: 20px; /* 캐러셀과 사용자 정보 사이의 여백 */
+    margin-right: 20px;
 }
 
-/* 캐러셀 이미지 스타일링 */
 .carousel-inner > .item > img {
     width: 100%;
     height: 300px;
 }
 
-/* 사용자 정보 스타일링 */
 .user-info {
     width: 25%;
     text-align: center;
@@ -110,19 +102,19 @@ header img {
 .user-info .card {
     position: relative;
     width: 100%;
-    height: 300px; /* 카드 높이 증가 */
+    height: 300px;
     margin: 0 auto;
     background-color: white;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     transition: all 0.7s ease-in-out;
-    padding-top: 150px; /* 상단 패딩 추가 */
+    padding-top: 150px;
 }
 
 .banner {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 150px; /* 배너 높이 감소 */
+    height: 150px;
     background-image: url("https://snap-photos.s3.amazonaws.com/img-thumbs/960w/RQ2Z75PQIN.jpg");
     background-size: cover;
     border-bottom: solid 1px lightgrey;
@@ -131,9 +123,9 @@ header img {
 
 .photo {
     position: absolute;
-    top: 100px; /* 사진 위치 조정 */
+    top: 100px;
     left: 50%;
-    transform: translate(-50%, 0); /* 중앙 정렬 */
+    transform: translate(-50%, 0);
     border-radius: 50%;
     height: 80px;
     width: 80px;
@@ -150,7 +142,7 @@ header img {
     list-style: none;
     text-align: center;
     padding-left: 0;
-    margin-top: 30px; /* 텍스트 위치 조정 */
+    margin-top: 30px;
     font-size: 16px;
     transition: all 0.7s ease-in-out;
 }
@@ -159,11 +151,6 @@ header img {
     margin-bottom: 10px;
 }
 
-.card button {
-    margin-top: 20px;
-}
-
-/* 그리드 컨테이너 스타일링 */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -173,14 +160,46 @@ header img {
 
 .grid-item {
     text-align: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid #0288d1; /* 시원한 청색 */
+}
+
+.grid-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .grid-item img {
-    width: 100%;
+    width: 80%;
     height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .grid-item p {
     margin-top: 10px;
     font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-primary {
+    background: none;
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 10px 20px;
+    padding: 10px 20px;
+    min-width: 150px;
+    border-radius: 50px;
+    min-height: 40px;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s;
+    background: linear-gradient(45deg, #0288d1, #03a9f4); /* 시원한 청색 그라데이션 */
+    box-shadow: 0 4px 30px rgba(3, 169, 244, 0.4);
 }

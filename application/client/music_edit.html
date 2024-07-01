@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음원 수정</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="./js/music_edit.js"></script> <!-- JS 파일 추가 -->
+    <link rel="stylesheet" href="./css/music_edit.css"> <!-- CSS 파일 추가 -->
+</head>
+
+<body ng-app="editApp" ng-controller="EditCtrl">
+    <div class="container">
+        <h2>음원 수정</h2>
+        <form id="editForm" ng-submit="submitForm()" enctype="multipart/form-data">
+            <input type="hidden" name="songId" ng-value="song._id"> <!-- Hidden input to pass songId -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>음원 파일</label>
+                        <input class="form-control" type="file" name="audioFile" file-model="audioFile">
+                        <div class="file-preview" ng-if="song.audioFile">
+                            <audio controls>
+                                <source ng-src="{{song.audioFile}}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>이미지 파일</label>
+                        <input class="form-control" type="file" name="imageFile" file-model="imageFile">
+                        <div class="file-preview" ng-if="song.imageFile">
+                            <img ng-src="{{song.imageFile}}" alt="음원 이미지">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>음원명</label>
+                        <input class="form-control" type="text" name="songName" ng-model="song.songName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>장르</label>
+                        <input class="form-control" type="text" name="genre" ng-model="song.genre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>곡 정보</label>
+                        <textarea class="form-control" name="songInfo" ng-model="song.songInfo" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>가사</label>
+                        <textarea class="form-control" name="lyrics" ng-model="song.lyrics" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>판매 금액</label>
+                        <input class="form-control" type="text" name="price" ng-model="song.price" required>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">수정하기</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -2,19 +2,22 @@ const shim = require('fabric-shim');
 
 const ABstore = class {
 
+  // Initialize the chaincode
   async Init(stub) {
     console.info('========= ABstore Init =========');
+
     // Define the Admin account details
     let adminAccount = {
       id: "Admin",
       point: 100000000,
-      account_Number: "123-1234-5678-90",
-      account_Money: 100000000
+      account_Number: "123-1234-5678-90", // 계좌번호는 문자열로 정의
+      account_Money: 100000000 // 잔액은 정수로 정의
     };
 
     let ret = stub.getFunctionAndParameters();
     console.info(ret);
     try {
+      // JSON 객체를 문자열로 변환하여 상태 데이터로 저장
       await stub.putState(adminAccount.id, Buffer.from(JSON.stringify(adminAccount)));
       return shim.success();
     } catch (err) {
@@ -41,35 +44,36 @@ const ABstore = class {
 
   async register(stub, args) {
     if (args.length != 6) {
-      return shim.error('Incorrect number of arguments. Expecting 6');
+        return shim.error('Incorrect number of arguments. Expecting 6');
     }
 
     let register = {
-      type: "user",
+      type : "user",
       name: args[0].trim(),
       id: args[1].trim(),
       pw: args[2].trim(),
       phone_number: args[3].trim(),
       account_number: args[4].trim(),
       account_money: parseInt(args[5].trim()),
-      point: 1000
+      point: 1000 // 초기 point 값을 1000으로 설정
     };
 
     console.info(`Attempting to register user: ${JSON.stringify(register)}`);
 
+    // Validate balance
     if (isNaN(register.account_money) || register.account_money < 0) {
-      throw new Error('Expecting non-negative integer value for balance');
+        throw new Error('Expecting non-negative integer value for balance');
     }
 
     let adminBytes = await stub.getState("Admin");
     if (!adminBytes || adminBytes.length === 0) {
-      throw new Error('Admin account not found');
+        throw new Error('Admin account not found');
     }
 
     let admin = JSON.parse(adminBytes.toString());
 
     if (admin.point < register.point) {
-      throw new Error('Insufficient points in admin account');
+        throw new Error('Insufficient points in admin account');
     }
 
     admin.point -= register.point;
@@ -78,6 +82,7 @@ const ABstore = class {
     await stub.putState("Admin", Buffer.from(JSON.stringify(admin)));
 
     console.info(`Registered user ${register.name} with ID ${register.id}`);
+    console.log(register.id, register.pw);
   }
 
   async login(stub, args) {
@@ -105,35 +110,35 @@ const ABstore = class {
 
   async charge(stub, args) {
     if (args.length != 2) {
-      throw new Error('Incorrect number of arguments. Expecting 2');
+        throw new Error('Incorrect number of arguments. Expecting 2');
     }
 
     let userId = args[0];
     let amount = parseInt(args[1]);
 
     if (isNaN(amount) || amount <= 0) {
-      throw new Error('Invalid charge amount');
+        throw new Error('Invalid charge amount');
     }
 
     let userBytes = await stub.getState(userId);
     if (!userBytes || userBytes.length === 0) {
-      throw new Error('User not found');
+        throw new Error('User not found');
     }
 
     let user = JSON.parse(userBytes.toString());
     let adminBytes = await stub.getState("Admin");
     if (!adminBytes || adminBytes.length === 0) {
-      throw new Error('Admin account not found');
+        throw new Error('Admin account not found');
     }
 
     let admin = JSON.parse(adminBytes.toString());
 
     if (user.account_money < amount) {
-      throw new Error('Insufficient funds in user account');
+        throw new Error('Insufficient funds in user account');
     }
 
     if (admin.point < amount) {
-      throw new Error('Insufficient points in admin account');
+        throw new Error('Insufficient points in admin account');
     }
 
     user.account_money -= amount;
@@ -149,19 +154,19 @@ const ABstore = class {
 
   async exchange(stub, args) {
     if (args.length != 2) {
-      return shim.error('Incorrect number of arguments. Expecting 2');
+        return shim.error('Incorrect number of arguments. Expecting 2');
     }
 
     let userId = args[0].trim();
     let amount = parseInt(args[1].trim());
 
     if (isNaN(amount) || amount <= 0) {
-      throw new Error('Expecting positive integer value for amount');
+        throw new Error('Expecting positive integer value for amount');
     }
 
     let userBytes = await stub.getState(userId);
     if (!userBytes || userBytes.length === 0) {
-      throw new Error('User not found');
+        throw new Error('User not found');
     }
 
     let user = JSON.parse(userBytes.toString());
@@ -170,7 +175,7 @@ const ABstore = class {
     let admin = JSON.parse(adminBytes.toString());
 
     if (user.point < amount) {
-      throw new Error('Insufficient points in user account');
+        throw new Error('Insufficient points in user account');
     }
 
     user.point -= amount;
@@ -179,7 +184,7 @@ const ABstore = class {
     let exchangeAmount = amount * 0.9;
 
     if (admin.account_Money < exchangeAmount) {
-      throw new Error('Insufficient funds in admin account');
+        throw new Error('Insufficient funds in admin account');
     }
 
     user.account_money += exchangeAmount;
@@ -200,6 +205,7 @@ const ABstore = class {
     let receiver = args[1];
     let amount = parseInt(args[2]);
 
+    // 90% transfer plus
     let transferAmount = amount * 0.9;
     let fee = amount - transferAmount;
 
@@ -243,6 +249,7 @@ const ABstore = class {
     console.info(`Transferred ${transferAmount} (90% of ${amount}) from ${sender} to ${receiver}`);
   }
 
+  // Deletes an entity from state
   async delete(stub, args) {
     if (args.length != 1) {
       throw new Error('Incorrect number of arguments. Expecting 1');
@@ -250,6 +257,7 @@ const ABstore = class {
 
     let A = args[0];
 
+    // Delete the key from the state in ledger
     await stub.deleteState(A);
   }
 
@@ -261,20 +269,23 @@ const ABstore = class {
     let jsonResp = {};
     let A = args[0];
 
+    // Get the state from the ledger
     let Avalbytes = await stub.getState(A);
     if (!Avalbytes) {
       jsonResp.error = 'Failed to get state for ' + A;
       throw new Error(JSON.stringify(jsonResp));
     }
 
-    let adminAccount = JSON.parse(Avalbytes.toString());
+     // Parse the JSON object
+     let adminAccount = JSON.parse(Avalbytes.toString());
 
-    let response = {
-      id: adminAccount.id,
-      point: adminAccount.point,
-      account_Number: adminAccount.account_Number,
-      account_Money: adminAccount.account_Money
-    };
+     // Return only specific fields
+     let response = {
+       id: adminAccount.id,
+       point: adminAccount.point,
+       account_Number: adminAccount.account_Number,
+       account_Money: adminAccount.account_Money
+     };
 
     jsonResp.name = A;
     jsonResp.amount = Avalbytes.toString();
@@ -282,34 +293,7 @@ const ABstore = class {
     console.info(jsonResp);
     console.info(response);
     return Avalbytes;
-  }
-
-  async registerMusic(stub, args) {
-    if (args.length != 8) { // 필요한 인자 수로 업데이트
-      return shim.error('Incorrect number of arguments. Expecting 8');
-    }
-
-    let song = {
-      type: "song",
-      userID: args[0].trim(),
-      songName: args[1].trim(),
-      genre: args[2].trim(),
-      songInfo: args[3].trim(),
-      lyrics: args[4].trim(),
-      price: parseInt(args[5].trim()),
-      audioFile: args[6].trim(),
-      imageFile: args[7].trim()
-      };
-
-    console.info(`Attempting to register song: ${JSON.stringify(song)}`);
-
-    if (isNaN(song.price) || song.price < 0) {
-      throw new Error('Expecting non-negative integer value for price');
-    }
-
-    await stub.putState(song.songName, Buffer.from(JSON.stringify(song)));
-
-    console.info(`Registered song ${song.songName} with ID ${song.songName}`);
+    // return Buffer.from(JSON.stringify(response));
   }
 };
 
