@@ -1,6 +1,6 @@
 body {
    font-family: 'Montserrat', sans-serif;
-   background: #f7edd5;;
+   background: #e1f5fe;
 }
 
 .container {
@@ -57,12 +57,13 @@ section#formHolder {
 }
 
 .brand a.logo {
-   color: #f95959;
+   color: #0288d1;
    font-size: 20px;
    font-weight: 700;
    text-decoration: none;
    line-height: 1em;
-}
+ }
+ 
 
 .brand a.logo span {
    font-size: 30px;
@@ -182,12 +183,12 @@ section#formHolder {
 }
 
 .form .form-group.hasError input {
-   border-color: #f95959 !important;
-}
-
-.form .form-group.hasError label {
-   color: #f95959 !important;
-}
+   border-color: #0288d1 !important;
+ }
+ 
+ .form .form-group.hasError label {
+   color: #0288d1 !important;
+ }
 
 .form label {
    font-size: 12px;
@@ -225,21 +226,21 @@ section#formHolder {
 }
 
 .form input.hasError {
-   border-color: #f95959;
-}
+   border-color: #0288d1;
+ }
 
 .form span.error {
-   color: #f95959;
-   font-family: 'Montserrat', sans-serif;
-   font-size: 12px;
-   position: absolute;
-   bottom: -20px;
-   right: 0;
-   display: none;
+  color: #0288d1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  display: none;
 }
 
 .form input[type=password] {
-   color: #f95959;
+  color: #0288d1;
 }
 
 .form .CTA {
@@ -250,13 +251,13 @@ section#formHolder {
    font-size: 12px;
    text-transform: uppercase;
    padding: 5px 30px;
-   background: #f95959;
+   background: #0288d1;
    color: #fff;
    border-radius: 30px;
    margin-right: 20px;
    border: none;
    font-family: 'Montserrat', sans-serif;
-}
+ }
 
 .form .CTA a.switch {
    font-size: 13px;
@@ -268,8 +269,8 @@ section#formHolder {
 }
 
 .form .CTA a.switch:hover {
-   color: #f95959;
-}
+   color: #0288d1;
+ }
 
 footer {
    text-align: center;
@@ -287,8 +288,8 @@ footer a:focus {
 }
 
 footer a:hover {
-   color: #f95959;
-}
+   color: #0288d1;
+ }
 
 @media (max-width: 768px) {
    .container {

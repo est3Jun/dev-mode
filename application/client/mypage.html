@@ -10,22 +10,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="./js/mypage.js"></script>
+    <script src="./js/music_register.js"></script>
     <link rel="stylesheet" href="./css/mypage.css">
 </head>
 <body ng-app="application" ng-controller="MypageCtrl">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">MyPage</a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
+    <header>
+        <img src="images/logo.png" alt="음원 사이트">
+    </header>
+    
+    <!-- 메뉴바 섹션 -->
+    <div class="navbar">
+        <a ng-click="goToMainpage()">홈</a>
+        <a ng-click="goToRegisterMusic()">등록하기</a>
+        <a ng-click="goToTransfer()">거래하기</a>
+        <a ng-click="goToMusic_search()">조회하기</a>
+        <a ng-click="goToMypage()">마이페이지</a>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="profile-card-inf">
                         <div class="profile-card-inf__item">
-                            <div class="profile-card-inf__title">{{user._id}}</div>
+                            <div class="profile-card-inf__title">{{user.id}}</div>
                             <div class="profile-card-inf__txt">아이디</div>
                         </div>
                         <div class="profile-card-inf__item">
@@ -66,20 +66,23 @@
                 <div class="my-songs">
                     <h3>나의 음원</h3>
                     <div class="song-list">
-                        <div class="song" ng-repeat="song in songs">
-                            <img ng-src="{{song.imageFile}}" alt="음원 표지">
-                            <div class="song-details">
-                                <p>{{song.title}}</p>
-                                <span>거래금액: {{song.price}}원</span>
-                                <div class="button-container">
-                                    <button class="btn btn-warning" ng-click="editSong(song._id)">수정</button>
-                                    <button class="btn btn-danger" ng-click="confirmDeleteSong(song._id)">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="song add-song" ng-click="goToAddSong()">
+                        <div class="song add-song" data-toggle="modal" data-target="#registerModal">
                             <div class="add-song-icon">+</div>
                         </div>
+                        <div class="song" ng-repeat="song in currentSongs">
+                            <img ng-src="{{song.imageFile}}" alt="음원 표지">
+                            <div class="song-details">
+                                <p>{{song.songName}}</p>
+                                <span>거래금액: {{song.price}}</span>
+                                <button class="btn btn-primary" ng-click="editSong(song._id)">수정</button>
+                                <button class="btn btn-danger" ng-click="confirmDeleteSong(song._id)">삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination">
+                        <button class="btn btn-default" ng-disabled="currentPage === 0" ng-click="prevPage()">이전</button>
+                        <span>Page {{currentPage + 1}} of {{totalPages}}</span>
+                        <button class="btn btn-default" ng-disabled="currentPage >= totalPages - 1" ng-click="nextPage()">다음</button>
                     </div>
                 </div>
             </div>
@@ -107,7 +110,7 @@
                     <p>잔액: {{user.account_money}}</p>
                     <div class="form-group">
                         <label for="chargeAmount">충전 금액:</label>
-                        <input type="number" class="form-control" id="chargeAmount" ng-model="chargeAmount" placeholder="충전 금액을 입력하세요">
+                        <input class="form-control" type="number" id="chargeAmount" ng-model="chargeAmount" placeholder="충전 금액을 입력하세요" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -133,7 +136,7 @@
                     <p>환전 가능 포인트: {{user.point}}</p>
                     <div class="form-group">
                         <label for="exchangeAmount">환전 금액:</label>
-                        <input type="number" class="form-control" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요">
+                        <input class="form-control" type="number" id="exchangeAmount" ng-model="exchangeAmount" placeholder="환전 금액을 입력하세요" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -144,16 +147,64 @@
         </div>
     </div>
 
+    <!-- 음원 등록 모달 -->
+    <div id="registerModal" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <!-- 모달 내용-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">음원 등록 / 수정</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm" action="/registerMusic" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="userID" ng-value="user._id">
+                        <div class="form-group">
+                            <label>음원명</label>
+                            <input class="form-control" type="text" name="songName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>장르</label>
+                            <input class="form-control" type="text" name="genre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>곡 정보</label>
+                            <textarea class="form-control" name="songInfo" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>가사</label>
+                            <textarea class="form-control" name="lyrics" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>음원 파일</label>
+                            <input class="form-control" type="file" name="audioFile" required>
+                        </div>
+                        <div class="form-group">
+                            <label>이미지 파일</label>
+                            <input class="form-control" type="file" name="imageFile" required>
+                        </div>
+                        <div class="form-group">
+                            <label>판매 금액</label>
+                            <input class="form-control" type="text" name="price" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">등록하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 삭제 확인 모달 -->
     <div id="deleteConfirmModal" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog">
+            <!-- 모달 내용-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">음원 삭제 확인</h4>
                 </div>
                 <div class="modal-body">
-                    <p>정말 이 음원을 삭제하시겠습니까?</p>
+                    <p>정말로 이 음원을 삭제하시겠습니까?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" ng-click="deleteSongConfirmed()">삭제</button>
@@ -162,6 +213,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

@@ -23,21 +23,24 @@ a, a:hover {
 }
 
 .navbar {
-  background-color: #4491a8;
-  border: none;
-  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(45deg, #0288d1, #03a9f4); /* 시원한 청색 그라데이션 */
+  overflow: hidden;
 }
 
-.navbar-brand {
-  color: #fff !important;
+.navbar a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 50px;
+  text-decoration: none;
+  margin: 0 10px;
 }
 
-.navbar-nav>li>a {
-  color: #fff !important;
-}
-
-.navbar-nav>li>a:hover {
-  background-color: #367a90 !important;
+.navbar a:hover {
+  background-color: #b3e5fc; /* 연한 하늘색 */
+  color: #0288d1;
 }
 
 .footer {
@@ -173,6 +176,9 @@ a, a:hover {
   border-radius: 12px;
   margin-top: 20px;
   text-align: center;
+  height: 780px;
+  overflow-y: auto; /* 스크롤 추가 */
+
 }
 
 .my-songs h3 {
@@ -203,7 +209,7 @@ a, a:hover {
   height: 100px;
   border-radius: 10px;
   object-fit: cover;
-  margin-bottom: 10px;  /* 아래쪽 여백 */
+  margin-bottom: 5px;  /* 아래쪽 여백 */
 }
 
 .song-details {

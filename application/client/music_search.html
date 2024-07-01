@@ -7,67 +7,100 @@
     <title>음원 검색</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./js/music_search.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext');
-
-        html {
-            position: relative;
-            overflow-x: hidden !important;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
         body {
-            font-family: 'Quicksand', sans-serif;
-            color: #324e63;
-            background: #f7f9fc;
-            line-height: 1.6;
+            background: #e0f7fa;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+
+        header img {
+            width: 100%;
+            height: 220px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(45deg, #0288d1, #03a9f4);
+            overflow: hidden;
+        }
+
+        .navbar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 50px;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            background-color: #b3e5fc;
+            color: #0288d1;
         }
 
         .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 40px 20px;
         }
 
-        h1 {
+        .form-container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            transition: transform 0.3s;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
             text-align: center;
-            color: #4491a8;
-            margin-bottom: 20px;
-            font-weight: 700;
+            color: #0288d1;
+            margin-bottom: 40px;
+            font-weight: bold;
         }
 
         .form-group label {
-            font-size: 18px;
-            color: #324e63;
+            font-size: 16px;
+            color: #555;
         }
 
         .form-control {
             font-size: 16px;
-            border-radius: 6px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 1.5rem;
         }
 
-        .btn {
-            font-size: 18px;
-            background-color: #4491a8;
-            color: #fff;
+        .btn-primary {
+            background: linear-gradient(45deg, #0288d1, #03a9f4);
             border: none;
-            border-radius: 6px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            transition: background 0.3s ease;
+            width: 100%;
         }
 
-        .btn:hover {
-            background-color: #367a90;
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #03a9f4, #0288d1);
         }
 
         .result {
@@ -88,39 +121,39 @@
             margin: 5px 0;
             font-size: 16px;
         }
-    </style>
-    <script>
-        async function fetchUserSongs() {
-            const userID = document.getElementById('userID').value;
-            const response = await fetch(`/userSongs?userID=${userID}`);
-            const songs = await response.json();
 
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '';
-
-            if (songs.length === 0) {
-                resultDiv.innerHTML = '<p>해당 회원의 음원이 없습니다.</p>';
-                return;
-            }
-
-            songs.forEach(song => {
-                const songDiv = document.createElement('div');
-                songDiv.className = 'song';
-                songDiv.innerHTML = `<p>음원명: ${song.songName}</p><p>장르: ${song.genre}</p><p>가격: ${song.price}</p>`;
-                resultDiv.appendChild(songDiv);
-            });
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
         }
-    </script>
+    </style>
 </head>
 
-<body>
+<body ng-app="searchApp" ng-controller="SearchCtrl">
+    <!-- 헤더 섹션 -->
+    <header>
+        <img src="images/logo.png" alt="음원 사이트">
+    </header>
+
+    <!-- 메뉴바 섹션 -->
+    <div class="navbar">
+        <a ng-click="goToMainpage()">홈</a>
+        <a ng-click="goToRegisterMusic()">등록하기</a>
+        <a ng-click="goToTransfer()">거래하기</a>
+        <a ng-click="goToMusic_search()">조회하기</a>
+        <a ng-click="goToMypage()">마이페이지</a>
+    </div>
+
     <div class="container">
         <h1>음원 검색</h1>
         <div class="form-group">
             <label for="userID">회원 ID:</label>
             <input type="text" id="userID" class="form-control" placeholder="Enter User ID">
         </div>
-        <button class="btn btn-primary" onclick="fetchUserSongs()">검색</button>
+        <button class="btn btn-primary" ng-click="fetchUserSongs()">검색</button>
         <div id="result" class="result"></div>
     </div>
 </body>

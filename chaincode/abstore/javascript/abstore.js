@@ -43,47 +43,56 @@ const ABstore = class {
   }
 
   async register(stub, args) {
+    console.log('Start registering user...');
+
     if (args.length != 6) {
         return shim.error('Incorrect number of arguments. Expecting 6');
     }
 
     let register = {
-      type : "user",
-      name: args[0].trim(),
-      id: args[1].trim(),
-      pw: args[2].trim(),
-      phone_number: args[3].trim(),
-      account_number: args[4].trim(),
-      account_money: parseInt(args[5].trim()),
-      point: 1000 // 초기 point 값을 1000으로 설정
+        type: "user",
+        name: args[0].trim(),
+        id: args[1].trim(),
+        pw: args[2].trim(),
+        phone_number: args[3].trim(),
+        account_number: args[4].trim(),
+        account_money: parseInt(args[5].trim()),
+        point: 1000 // 초기 point 값을 1000으로 설정
     };
 
     console.info(`Attempting to register user: ${JSON.stringify(register)}`);
 
-    // Validate balance
+    // Validate account_money
     if (isNaN(register.account_money) || register.account_money < 0) {
-        throw new Error('Expecting non-negative integer value for balance');
+        throw new Error('Expecting non-negative integer value for account_money');
     }
 
+    console.log('Fetching Admin account...');
     let adminBytes = await stub.getState("Admin");
     if (!adminBytes || adminBytes.length === 0) {
         throw new Error('Admin account not found');
     }
 
     let admin = JSON.parse(adminBytes.toString());
+    console.log(`Admin account fetched: ${JSON.stringify(admin)}`);
 
     if (admin.point < register.point) {
         throw new Error('Insufficient points in admin account');
     }
 
+    // Deduct points from admin and assign to user
     admin.point -= register.point;
+    console.log(`Admin after point deduction: ${JSON.stringify(admin)}`);
 
     await stub.putState(register.id, Buffer.from(JSON.stringify(register)));
+    console.log(`User ${register.id} state stored`);
+
     await stub.putState("Admin", Buffer.from(JSON.stringify(admin)));
+    console.log('Admin state updated');
 
     console.info(`Registered user ${register.name} with ID ${register.id}`);
     console.log(register.id, register.pw);
-  }
+}
 
   async login(stub, args) {
     if (args.length != 2) {
@@ -293,7 +302,6 @@ const ABstore = class {
     console.info(jsonResp);
     console.info(response);
     return Avalbytes;
-    // return Buffer.from(JSON.stringify(response));
   }
 };
 

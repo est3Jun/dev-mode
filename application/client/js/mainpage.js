@@ -41,6 +41,23 @@ app.controller('MainCtrl', function($scope, $http) {
     $scope.goToMypage = function() {
         window.location.href = 'mypage.html?userId=' + $scope.user._id;
     };
+
+    $scope.goToTransfer = function() {
+        window.location.href = 'transfer.html?userId=' + $scope.user._id;
+    };
+
+    $scope.goToMusic_search = function() {
+        window.location.href = 'music_search.html?userId=' + $scope.user._id;
+    };
+
+    $scope.goToMainpage = function() {
+        window.location.href = 'mainpage.html?userId=' + $scope.user._id;
+    };
+
+    $scope.goToRegisterMusic = function() {
+        window.location.href = 'music_register.html?userId=' + $scope.user._id;
+    };
+
     $scope.goToRegisterMusic = function() {
         window.location.href = 'music_register.html?userId=' + $scope.user._id;  // userId를 URL 파라미터로 포함
     };
