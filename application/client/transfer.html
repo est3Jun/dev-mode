@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음원 거래</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/transfer.css">
+    <script src="./js/transfer.js"></script>
+</head>
+
+<body ng-app="application" ng-controller="TransferCtrl">
+    <!-- 헤더 섹션 -->
+    <header>
+        <img src="images/logo.png" alt="음원 사이트">
+    </header>
+
+    <!-- 메뉴바 섹션 -->
+    <div class="navbar">
+        <a ng-click="goToMainpage()">홈</a>
+        <a ng-click="goToRegisterMusic()">등록하기</a>
+        <a ng-click="goToTransfer()">거래하기</a>
+        <a ng-click="goToMusic_search()">조회하기</a>
+        <a ng-click="goToMypage()">마이페이지</a>
+    </div>
+
+    <div class="container">
+        <h1>음원 거래</h1>
+        <form ng-submit="submitTransfer()">
+            <div class="form-group">
+                <label for="senderID">송신자 ID:</label>
+                <input type="text" id="senderID" class="form-control" ng-model="transferData.sender" placeholder="Enter Sender ID" required>
+            </div>
+            <div class="form-group">
+                <label for="receiverID">수신자 ID:</label>
+                <input type="text" id="receiverID" class="form-control" ng-model="transferData.receiver" placeholder="Enter Receiver ID" required>
+            </div>
+            <div class="form-group">
+                <label for="songName">음원명:</label>
+                <input type="text" id="songName" class="form-control" ng-model="transferData.songName" placeholder="Enter Song Name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">거래 제출</button>
+        </form>
+    </div>
+</body>
+
+</html>

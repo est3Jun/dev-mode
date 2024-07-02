@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음원 검색</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./js/music_search.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+        body {
+            background: #e0f7fa;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px 0;
+        }
+
+        header img {
+            width: 100%;
+            height: 220px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(45deg, #0288d1, #03a9f4);
+            overflow: hidden;
+        }
+
+        .navbar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 50px;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            background-color: #b3e5fc;
+            color: #0288d1;
+        }
+
+        .container {
+            padding: 40px 20px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            transition: transform 0.3s;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0288d1;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .form-control {
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #0288d1, #03a9f4);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #03a9f4, #0288d1);
+        }
+
+        .result {
+            margin-top: 30px;
+        }
+
+        .song {
+            background: #e9ecef;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            color: #324e63;
+        }
+
+        .song p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body ng-app="searchApp" ng-controller="SearchCtrl">
+    <!-- 헤더 섹션 -->
+    <header>
+        <img src="images/logo.png" alt="음원 사이트">
+    </header>
+
+    <!-- 메뉴바 섹션 -->
+    <div class="navbar">
+        <a ng-click="goToMainpage()">홈</a>
+        <a ng-click="goToRegisterMusic()">등록하기</a>
+        <a ng-click="goToTransfer()">거래하기</a>
+        <a ng-click="goToMusic_search()">조회하기</a>
+        <a ng-click="goToMypage()">마이페이지</a>
+    </div>
+
+    <div class="container">
+        <h1>음원 검색</h1>
+        <div class="form-group">
+            <label for="userID">회원 ID:</label>
+            <input type="text" id="userID" class="form-control" placeholder="Enter User ID">
+        </div>
+        <button class="btn btn-primary" ng-click="fetchUserSongs()">검색</button>
+        <div id="result" class="result"></div>
+    </div>
+</body>
+
+</html>

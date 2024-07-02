@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    background: #e0f7fa; /* 밝은 청록색 배경 */
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    background-color: #f8f9fa;
+    text-align: center;
+    font-weight: bold;
+}
+
+header img {
+    width: 100%;
+    height: 220px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(45deg, #0288d1, #03a9f4); /* 시원한 청색 그라데이션 */
+    overflow: hidden;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 50px;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navbar a:hover {
+    background-color: #b3e5fc; /* 연한 하늘색 */
+    color: #0288d1;
+}
+
+.search-bar {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.searchTerm {
+    width: 30%;
+    border: 3px solid #0288d1;
+    border-right: none;
+    padding: 10px;
+    height: 36px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #0288d1;
+}
+
+.searchTerm:focus {
+    color: #0288d1;
+}
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #0288d1;
+    background: #0288d1;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    margin: 20px 0;
+}
+
+.carousel {
+    width: 70%;
+    margin-right: 20px;
+}
+
+.carousel-inner > .item > img {
+    width: 100%;
+    height: 300px;
+}
+
+.user-info {
+    width: 25%;
+    text-align: center;
+}
+
+.user-info .card {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.7s ease-in-out;
+    padding-top: 150px;
+}
+
+.banner {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 150px;
+    background-image: url("https://snap-photos.s3.amazonaws.com/img-thumbs/960w/RQ2Z75PQIN.jpg");
+    background-size: cover;
+    border-bottom: solid 1px lightgrey;
+    transition: all 0.7s ease-in-out;
+}
+
+.photo {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    background-image: url("https://filmshotfreezer.files.wordpress.com/2011/07/untitled-1.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+    box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+    transition: top 0.7s ease-in-out, background 0.15s ease;
+    z-index: 2;
+}
+
+.card ul {
+    list-style: none;
+    text-align: center;
+    padding-left: 0;
+    margin-top: 30px;
+    font-size: 16px;
+    transition: all 0.7s ease-in-out;
+}
+
+.card ul li {
+    margin-bottom: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.grid-item {
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid #0288d1; /* 시원한 청색 */
+}
+
+.grid-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item img {
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-primary {
+    background: none;
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 10px 20px;
+    padding: 10px 20px;
+    min-width: 150px;
+    border-radius: 50px;
+    min-height: 40px;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s;
+    background: linear-gradient(45deg, #0288d1, #03a9f4); /* 시원한 청색 그라데이션 */
+    box-shadow: 0 4px 30px rgba(3, 169, 244, 0.4);
+}
