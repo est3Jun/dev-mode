@@ -20,7 +20,6 @@ ABstore는 Node.js로 구현된 체인코드 프로젝트로, 블록체인 기�
 <br/><br/>
 
 ### 🗺 기술 설계도
-<img width=100% src="https://github.com/hkyuuu00/dev-mode/assets/155419559/b46445cc-97ab-4af1-a1a9-07443e14f6c6"><br/><br/>
 
 ### 💻 기술 스택
 - **OS:** &nbsp;&nbsp;![Windows 11](https://img.shields.io/badge/Windows%2011-%230079d5.svg?style=for-the-badge&logo=Windows%2011&logoColor=white) ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
