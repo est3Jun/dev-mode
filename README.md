@@ -10,6 +10,15 @@ WaterMelon은 js로 구현된 체인코드 프로젝트로, 블록체인 기술�
 - API 통신을 통해 가져온 데이터를 프론트에서 보여주도록 설계
 <br/><br/><br/>
 
+### 💻 기술 스택
+- **OS:** &nbsp;&nbsp;![Windows 11](https://img.shields.io/badge/Windows%2011-%230079d5.svg?style=for-the-badge&logo=Windows%2011&logoColor=white) ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+- **Container 배포:** &nbsp;&nbsp;![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+- **FrameWork:** &nbsp;&nbsp;![AngularJS](https://img.shields.io/badge/angularjs-%23E23237.svg?style=for-the-badge&logo=angularjs&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+- **Style:** &nbsp;&nbsp;![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+- **Language:** &nbsp;&nbsp;![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+- **Tools:** &nbsp;&nbsp;![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+<br/><br/>
+
 ## 📝 프로젝트 설명
 
 ### 💼 WaterMelon의 기능
@@ -26,16 +35,6 @@ WaterMelon은 js로 구현된 체인코드 프로젝트로, 블록체인 기술�
 3. 유저 간 음원 거래 기능, 음원 검색 및 조회
 <img width=100% src="https://github.com/est3Jun/dev-mode/blob/6f04ff86ddeaa96d6e745683f0f9374d97cf267a/application/client/images/%EC%9D%8C%EC%9B%90%EA%B1%B0%EB%9E%98.PNG">
 <img width=100% src="https://github.com/est3Jun/dev-mode/blob/6f04ff86ddeaa96d6e745683f0f9374d97cf267a/application/client/images/%EC%9D%8C%EC%9B%90%EA%B2%80%EC%83%89.PNG">
-<br/><br/>
-
-
-### 💻 기술 스택
-- **OS:** &nbsp;&nbsp;![Windows 11](https://img.shields.io/badge/Windows%2011-%230079d5.svg?style=for-the-badge&logo=Windows%2011&logoColor=white) ![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
-- **Container 배포:** &nbsp;&nbsp;![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-- **FrameWork:** &nbsp;&nbsp;![AngularJS](https://img.shields.io/badge/angularjs-%23E23237.svg?style=for-the-badge&logo=angularjs&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-- **Style:** &nbsp;&nbsp;![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-- **Language:** &nbsp;&nbsp;![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-- **Tools:** &nbsp;&nbsp;![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 <br/><br/>
 
 ### ✨ 주요 기능 및 이미지
