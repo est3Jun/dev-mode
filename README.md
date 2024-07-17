@@ -1,5 +1,8 @@
-# WaterMelon 프로젝트
 <img width=50% src="https://github.com/est3Jun/dev-mode/blob/a49df01fc405882261489b2346abfa7ce249d5ad/application/client/images/%EB%A1%9C%EA%B3%A0.png">
+
+
+# WaterMelon 프로젝트
+
 ### 📖 프로젝트 개요
 WaterMelon은 js로 구현된 체인코드 프로젝트로, 블록체인 기술을 사용하여 음원 거래 및 관리 서비스를 제공합니다.
 <br/><br/>
