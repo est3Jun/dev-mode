@@ -15,7 +15,7 @@ ABstore는 Node.js로 구현된 체인코드 프로젝트로, 블록체인 기�
 ### 💼 ABstore의 기능
 1. 사용자 등록 및 로그인
 2. 음원 등록, 수정, 삭제
-https://github.com/est3Jun/dev-mode/blob/f61fb4412b93d2626d1ac7f214dbdf12f321e622/application/client/images/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20%EB%A6%AC%EB%A9%94%EC%9D%B4%ED%81%AC.PNG
+<img width=100% src="https://github.com/est3Jun/dev-mode/blob/f61fb4412b93d2626d1ac7f214dbdf12f321e622/application/client/images/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20%EB%A6%AC%EB%A9%94%EC%9D%B4%ED%81%AC.PNG">
 3. 유저 간 음원 거래 기능
 4. 음원 검색 및 조회
 <br/><br/>
