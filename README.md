@@ -57,9 +57,7 @@ ABstore는 Node.js로 구현된 체인코드 프로젝트로, 블록체인 기�
 - cURL
 - Docker Community Edition CE 23.0.6
 - Docker Compose 1.27.4 이상
-- Go 1.16.7
 - Git 2.9.x 이상
-- Python 2.7.17
 - Node.js 12.13.1
 - npm 5.6.0
 - VSCode v1.28
