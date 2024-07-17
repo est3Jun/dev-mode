@@ -19,44 +19,39 @@ WaterMelon은 js로 구현된 체인코드 프로젝트로, 블록체인 기술�
 - **FrameWork:** &nbsp;&nbsp;![AngularJS](https://img.shields.io/badge/angularjs-%23E23237.svg?style=for-the-badge&logo=angularjs&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 - **Style:** &nbsp;&nbsp;![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 - **Language:** &nbsp;&nbsp;![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-- **Tools:** &nbsp;&nbsp;![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+- **Tools:** &nbsp;&nbsp;![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 <br/><br/>
 
 ## 📝 프로젝트 설명
 
 ### 💼 WaterMelon의 기능
-#1. 포인트 충전, 환전 기능
-
-<img width=75% src="https://github.com/est3Jun/dev-mode/blob/fc11c941cc9bd79a9b31c43a74ae01fab5bcb4c6/application/client/images/%EC%B6%A9%EC%A0%84%ED%95%98%EA%B8%B0.PNG">
-<img width=48% src="https://github.com/est3Jun/dev-mode/blob/fc11c941cc9bd79a9b31c43a74ae01fab5bcb4c6/application/client/images/%ED%99%98%EC%A0%84.PNG">
-<img width=48% src="https://github.com/est3Jun/dev-mode/blob/7990cdc36ba7437ee275cc2823ca0048f5c70432/application/client/images/%ED%99%98%EC%A0%84%20%ED%99%95%EC%9D%B8.PNG">
-
-#2. 음원 등록, 수정, 삭제
-
-<img width=49% src="https://github.com/est3Jun/dev-mode/blob/f61fb4412b93d2626d1ac7f214dbdf12f321e622/application/client/images/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20%EB%A6%AC%EB%A9%94%EC%9D%B4%ED%81%AC.PNG">
-<img width=49% src="https://github.com/est3Jun/dev-mode/blob/fc11c941cc9bd79a9b31c43a74ae01fab5bcb4c6/application/client/images/asasasas.PNG">
-<img width=49% src="https://github.com/est3Jun/dev-mode/blob/7990cdc36ba7437ee275cc2823ca0048f5c70432/application/client/images/%EC%9D%8C%EC%9B%90%EC%82%AD%EC%A0%9C.PNG">
-
-#3. 유저 간 음원 거래 기능, 음원 검색 및 조회
-
-<img width=65% src="https://github.com/est3Jun/dev-mode/blob/6f04ff86ddeaa96d6e745683f0f9374d97cf267a/application/client/images/%EC%9D%8C%EC%9B%90%EA%B1%B0%EB%9E%98.PNG">
-<img width=65% src="https://github.com/est3Jun/dev-mode/blob/6f04ff86ddeaa96d6e745683f0f9374d97cf267a/application/client/images/%EC%9D%8C%EC%9B%90%EA%B2%80%EC%83%89.PNG">
-<br/><br/>
-
-### ✨ 주요 기능 및 이미지
-📌 Home<br/>
-- **메뉴바:** 로고와 각종 기능들을 이용할 수 있는 메뉴 바 구현<br/>
-- **광고:** 사용자에게 어떻게 사용하는지와 사용하고 싶도록 디자인 구현<br/><br/><br/>
+📌 포인트 충전 및 환전<br/>
+- **포인트 충전:** 현금을 포인트를 충전<br/>
+- **포인트 환전:** 포인트를 현금으로 환전(관리자에게 환전 수수료 10%)<br/><br/><br/>
+<div style="display: flex; justify-content: space-between;">
+<img width=100% src="https://github.com/est3Jun/dev-mode/blob/fc11c941cc9bd79a9b31c43a74ae01fab5bcb4c6/application/client/images/%EC%B6%A9%EC%A0%84%ED%95%98%EA%B8%B0.PNG">
+<img width=48% height=300px src="https://github.com/est3Jun/dev-mode/blob/fc11c941cc9bd79a9b31c43a74ae01fab5bcb4c6/application/client/images/%ED%99%98%EC%A0%84.PNG">
+<img width=48% height=300px src="https://github.com/est3Jun/dev-mode/blob/7990cdc36ba7437ee275cc2823ca0048f5c70432/application/client/images/%ED%99%98%EC%A0%84%20%ED%99%95%EC%9D%B8.PNG">
+</div><br/><br/>
 
 📌 음원 등록 및 수정<br/>
 - **음원 등록:** 음원 정보 입력 후 등록<br/>
 - **음원 수정:** 기존 음원 정보 수정<br/><br/><br/>
+<div style="display: flex; justify-content: space-between;">
+<img width=100% src="https://github.com/est3Jun/dev-mode/blob/f61fb4412b93d2626d1ac7f214dbdf12f321e622/application/client/images/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80%20%EB%A6%AC%EB%A9%94%EC%9D%B4%ED%81%AC.PNG">
+<img width=49% height=250px src="https://github.com/est3Jun/dev-mode/blob/fc11c941cc9bd79a9b31c43a74ae01fab5bcb4c6/application/client/images/asasasas.PNG">
+<img width=49% height=250px src="https://github.com/est3Jun/dev-mode/blob/7990cdc36ba7437ee275cc2823ca0048f5c70432/application/client/images/%EC%9D%8C%EC%9B%90%EC%82%AD%EC%A0%9C.PNG">
+</div><br/><br/>
 
-📌 음원 거래<br/>
-- **음원 전송:** 보내는 유저와 받는 유저의 ID를 입력 후 전송<br/><br/><br/>
-
-📌 음원 검색<br/>
+📌 음원 거래 및 검색<br/>
+- **음원 전송:** 보내는 유저와 받는 유저의 ID를 입력 후 전송<br/>
 - **음원 검색:** 사용자 ID를 통해 음원 검색<br/><br/><br/>
+
+<div style="display: flex; justify-content: space-between;">
+<img width=49% height=300px src="https://github.com/est3Jun/dev-mode/blob/6f04ff86ddeaa96d6e745683f0f9374d97cf267a/application/client/images/%EC%9D%8C%EC%9B%90%EA%B1%B0%EB%9E%98.PNG">
+<img width=40% height=300px src="https://github.com/est3Jun/dev-mode/blob/6f04ff86ddeaa96d6e745683f0f9374d97cf267a/application/client/images/%EC%9D%8C%EC%9B%90%EA%B2%80%EC%83%89.PNG">
+</div><br/><br/>
+
 
 ## ⚙️ 프로젝트 설치 및 실행 방법
 
@@ -99,7 +94,3 @@ git clone <repository-url>
 cd abstore
 npm install
 npm start
-
-🏰Client, Server repository
-📱 <a href="<client-repo-url>">Client</a></br>
-💻 <a href="<server-repo-url>">Server</a></br>
