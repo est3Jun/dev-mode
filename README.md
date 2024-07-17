@@ -52,6 +52,7 @@ WaterMelon은 js로 구현된 체인코드 프로젝트로, 블록체인 기술�
 <img width=40% height=300px src="https://github.com/est3Jun/dev-mode/blob/6f04ff86ddeaa96d6e745683f0f9374d97cf267a/application/client/images/%EC%9D%8C%EC%9B%90%EA%B2%80%EC%83%89.PNG">
 </div><br/><br/>
 
+### 🎧 <a href="https://youtu.be/0JzT3CNb6NY">시연영상</a>
 
 ## ⚙️ 프로젝트 설치 및 실행 방법
 
